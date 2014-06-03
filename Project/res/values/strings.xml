@@ -2,6 +2,9 @@
 <resources>
 
     <string name="app_name">speedFix</string>
-    <string name="hello_world">Hello world!</string>
+    
+    <color name="clrWhite">#FFFFFF</color>
+    <color name="clrDarkGray">#333542</color>
+    <color name="clrDarkRed">#4F0101</color>
 
 </resources>
