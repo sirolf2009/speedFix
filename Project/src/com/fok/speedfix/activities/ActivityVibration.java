@@ -1,12 +1,12 @@
-package com.fok.speedfix;
+package com.fok.speedfix.activities;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+
+import com.fok.speedfix.R;
 
 public class ActivityVibration extends Activity {
 

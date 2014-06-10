@@ -1,8 +1,7 @@
 package com.fok.speedfix;
 
-import com.fok.speedfix.activities.ActivityCompanyList;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class MainActivity extends Activity {
