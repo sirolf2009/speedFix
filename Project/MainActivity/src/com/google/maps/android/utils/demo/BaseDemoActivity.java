@@ -1,12 +1,11 @@
-package com.fok.speedfix;
+package com.google.maps.android.utils.demo;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
-public abstract class BaseMapActivity extends FragmentActivity {
+public abstract class BaseDemoActivity extends FragmentActivity {
     private GoogleMap mMap;
 
     protected int getLayoutId() {
@@ -32,14 +31,14 @@ public abstract class BaseMapActivity extends FragmentActivity {
         }
         mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         if (mMap != null) {
-        	startMap();
+            startDemo();
         }
     }
 
     /**
      * Run the demo-specific code.
      */
-    protected abstract void startMap();
+    protected abstract void startDemo();
 
     protected GoogleMap getMap() {
         setUpMapIfNeeded();
