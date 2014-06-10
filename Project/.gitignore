@@ -1,2 +1,9 @@
+.classpath
+.project
+ic_launcher-web.png
+proguard-project.txt
 AndroidManifest.xml
 project.properties
+assets/
+bin/
+gen/
