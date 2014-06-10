@@ -14,8 +14,7 @@ public class MainActivity extends Activity {
 		instance = this;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		ActivityCompanyList.createNotification("Test");
+		startService(new Intent(this, ServiceDatabase.class));
 	}
 	
 	public void openMap(View view) {

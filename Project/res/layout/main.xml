@@ -47,7 +47,7 @@
         android:textColor="@color/clrWhite" />
 
     <TextView
-        android:id="@+id/TextView02"
+        android:id="@+id/lblBrand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
@@ -60,9 +60,9 @@
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView02"
+        android:layout_alignLeft="@+id/lblBrand"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/TextView02"
+        android:layout_below="@+id/lblBrand"
         android:text="Een overzicht van uw beoordelingen"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/clrWhite" />
