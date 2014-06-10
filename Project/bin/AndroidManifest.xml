@@ -5,16 +5,20 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="9"
         android:targetSdkVersion="19" />
-    
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        <!-- Gokhan Kacan -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        
         <activity
             android:name="com.fok.speedfix.MainActivity"
             android:label="@string/app_name" >
@@ -24,6 +28,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.fok.speedfix.activities.ActivityVibration"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Gokhan Kacan -->
+		<activity
+            android:name="com.fok.speedfix.activities.ActivitySignIn"
+            android:label="@string/app_name" >
+            <intent-filter>
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
