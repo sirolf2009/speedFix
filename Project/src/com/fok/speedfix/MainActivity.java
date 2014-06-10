@@ -1,9 +1,9 @@
 package com.fok.speedfix;
 
-import com.fok.speedfix.activities.ActivityCompanyList;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends Activity {
 	
@@ -14,6 +14,12 @@ public class MainActivity extends Activity {
 		instance = this;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		startService(new Intent(this, ServiceDatabase.class));
+		
+		ActivityCompanyList.createNotification("Test");
+	}
+	
+	public void openMap(View view) {
+		Intent intent = new Intent(this, ActivityMap.class);
+	    startActivity(intent);
 	}
 }
