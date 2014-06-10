@@ -1,6 +1,5 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1402388799494 621451 5896b0a4e377ac4242eb2bc785220c1c4fc052f4 C:\Program Files\ADT\sdk\extras\android\support\v7\appcompat\libs\android-support-v4.jar
-1402388761091 621451 5896b0a4e377ac4242eb2bc785220c1c4fc052f4 C:\Users\Calamity\Desktop\Project\library\libs\android-support-v4.jar
-1402388801037 621451 5896b0a4e377ac4242eb2bc785220c1c4fc052f4 C:\Users\Calamity\Desktop\Project\libs\android-support-v4.jar
+1399974590786 648327 ded9acc6a9792b8f1afc470f0c9cd36d178914cd C:\Users\Floris\android\appcompat_v7_4\libs\android-support-v4.jar
+1401279634386 648327 ded9acc6a9792b8f1afc470f0c9cd36d178914cd C:\Users\Floris\Documents\GitHub\speedFix\Project\libs\android-support-v4.jar

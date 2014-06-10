@@ -143,34 +143,4 @@
         android:layout_below="@+id/relativeLayout1"
         android:layout_toLeftOf="@+id/textView1" />
 
-    <Button
-        android:id="@+id/Button04"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Button03"
-        android:layout_marginTop="15dp"
-        android:layout_toLeftOf="@+id/textView1"
-        android:onClick="openMap" />
-
-    <TextView
-        android:id="@+id/TextView07"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView06"
-        android:layout_alignTop="@+id/Button04"
-        android:text="Mijn Locatie"
-        android:textColor="@color/clrWhite"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/TextView08"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView07"
-        android:layout_below="@+id/TextView07"
-        android:text="Uw locatie, en de locatie van de bedrijven om u heen."
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/clrWhite"/>
-
 </RelativeLayout>
