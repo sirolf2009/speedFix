@@ -3,8 +3,8 @@ package com.fok.speedfix;
 import java.util.Arrays;
 import java.util.Set;
 
-import com.fok.speedfix.Util.PhoneListAdapter;
-import com.fok.speedfix.Util.Storage;
+import com.fok.speedfix.util.PhoneListAdapter;
+import com.fok.speedfix.util.Storage;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

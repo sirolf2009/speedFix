@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.fok.speedfix.MainActivity;
 import com.fok.speedfix.R;
-import com.fok.speedfix.Util.Storage;
+import com.fok.speedfix.util.Storage;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

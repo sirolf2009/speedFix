@@ -1,4 +1,4 @@
-package com.fok.speedfix.Util;
+package com.fok.speedfix.util;
 
 public class Log {
 
