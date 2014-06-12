@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends Activity {
-	
+
 	public static MainActivity instance;
 
 	@Override
@@ -15,11 +15,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		ActivityCompanyList.createNotification("Test");
+		startActivity(new Intent(this, ActivityPhoneList.class));
 	}
-	
+
 	public void openMap(View view) {
 		Intent intent = new Intent(this, ActivityMap.class);
-	    startActivity(intent);
+		startActivity(intent);
 	}
 }

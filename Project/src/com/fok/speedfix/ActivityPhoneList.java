@@ -1,9 +1,10 @@
 package com.fok.speedfix;
 
+import java.util.Arrays;
 import java.util.Set;
 
-import com.fok.speedfix.MainActivity;
-import com.fok.speedfix.R;
+import com.fok.speedfix.Util.Log;
+import com.fok.speedfix.Util.PhoneListAdapter;
 import com.fok.speedfix.Util.Storage;
 
 import android.annotation.TargetApi;
@@ -14,20 +15,39 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.view.View;
+import android.widget.ListView;
 
-public class ActivityCompanyList extends Activity {
+public class ActivityPhoneList extends Activity {
 
-	public ActivityCompanyList() {
+	@Override
+	public void onCreate(Bundle saved) {
+		super.onCreate(saved);
+		setContentView(R.layout.phone_list);
+		
+		String[] array = new String[] {
+				"Samsung" ,
+				"Samsung" ,
+				"Vodafone"
+		};
+		((ListView)findViewById(R.id.listView1)).setAdapter(new PhoneListAdapter(this, R.id.textView1, Arrays.asList(array)));
 	}
 	
+	public void test(View v) {
+		Log.i(""+v);
+		View info = v.findViewById(R.id.moar_info);
+		info.setVisibility(info.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+	}
+
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	public static void createNotification(String companyName, Context context) {
+	public static void createNotification(String phoneIssue, Context context) {
 		NotificationCompat.Builder mBuilder =
 		        new NotificationCompat.Builder(context)
 		        .setSmallIcon(R.drawable.logo)
-		        .setContentTitle(companyName)
-		        .setContentText("wants to fix your device!")
+		        .setContentTitle(phoneIssue)
+		        .setContentText("Tap for details")
 		        .setAutoCancel(true);
 		
 		Intent resultIntent = new Intent(context, MainActivity.class); //TODO resultactivity
@@ -50,4 +70,5 @@ public class ActivityCompanyList extends Activity {
 		}
 		Storage.saveEngineers(saved, context);
 	}
+	
 }
