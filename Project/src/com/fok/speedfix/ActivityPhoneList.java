@@ -3,7 +3,6 @@ package com.fok.speedfix;
 import java.util.Arrays;
 import java.util.Set;
 
-import com.fok.speedfix.Util.Log;
 import com.fok.speedfix.Util.PhoneListAdapter;
 import com.fok.speedfix.Util.Storage;
 
@@ -36,7 +35,6 @@ public class ActivityPhoneList extends Activity {
 	}
 	
 	public void test(View v) {
-		Log.i(""+v);
 		View info = v.findViewById(R.id.moar_info);
 		info.setVisibility(info.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
 	}
@@ -50,9 +48,9 @@ public class ActivityPhoneList extends Activity {
 		        .setContentText("Tap for details")
 		        .setAutoCancel(true);
 		
-		Intent resultIntent = new Intent(context, MainActivity.class); //TODO resultactivity
+		Intent resultIntent = new Intent(context, ActivityPhoneList.class);
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-		stackBuilder.addParentStack(MainActivity.class);
+		stackBuilder.addParentStack(ActivityPhoneList.class);
 		stackBuilder.addNextIntent(resultIntent);
 		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 		mBuilder.setContentIntent(resultPendingIntent);

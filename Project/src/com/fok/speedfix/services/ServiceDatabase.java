@@ -1,4 +1,4 @@
-package com.fok.speedfix;
+package com.fok.speedfix.services;
 
 import com.fok.speedfix.ActivityCompanyList;
 

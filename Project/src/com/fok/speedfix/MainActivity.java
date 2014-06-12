@@ -13,9 +13,14 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		instance = this;
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.splash);
 		
-		startActivity(new Intent(this, ActivityPhoneList.class));
+		findViewById(R.id.imageView1).postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				instance.setContentView(R.layout.main);
+			}
+		}, 2000);
 	}
 
 	public void openMap(View view) {
