@@ -1,5 +1,8 @@
 package com.fok.speedfix;
 
+
+import com.fok.speedfix.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
