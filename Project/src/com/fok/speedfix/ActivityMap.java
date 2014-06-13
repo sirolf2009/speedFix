@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
 
-public class ActivityMap extends BaseMapActivity {
+public class ActivityMap extends ActivityBaseMap {
     private Marker yourLocation;
     private String[] locations = {"Apollostraat rotterdam nederland", "Westzeedijk rotterdam nederland", "vierambachtstraat rotterdam nederland", "Zwartjanstraat rotterdam nederland", "Bloemstraat rotterdamn nederland", "Straatweg rotterdam nederland", "Kleiweg rotterdam nederland", "Gordelweg rotterdam nederland", "Kalverstraat amsterdam nederland", "Henry Dunantlaan Barendrecht Nederland"};
     private String[] bizNames = {"PhoneRepair", "PhoneRepairPro", "PhoneRepairSuperPro", "PhoneRepairDoublePro", "PhoneRepairer", "PhoneRepairBuddy", "PhoneRepairBro", "PhoneRepairDad", "PhoneRepairGod", "PhoneRepairKing"};

@@ -14,6 +14,7 @@ public class MainActivity extends Activity {
 		instance = this;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
+		startActivity(new Intent(this, ActivitySignIn.class));
 		
 		findViewById(R.id.imageView1).postDelayed(new Runnable() {
 			@Override

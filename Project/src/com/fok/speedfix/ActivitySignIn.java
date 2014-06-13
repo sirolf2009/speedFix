@@ -27,6 +27,7 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.Plus.PlusOptions;
 import com.google.android.gms.plus.model.people.Person;
 
 public class ActivitySignIn extends Activity implements OnClickListener,
@@ -79,7 +80,7 @@ ConnectionCallbacks, OnConnectionFailedListener {
 	// Initializing google plus api client
 	mGoogleApiClient = new GoogleApiClient.Builder(this)
 			.addConnectionCallbacks(this)
-			.addOnConnectionFailedListener(this).addApi(Plus.API, null)
+			.addOnConnectionFailedListener(this).addApi(Plus.API, PlusOptions.builder().build())
 			.addScope(Plus.SCOPE_PLUS_LOGIN).build();
 	Log.d("speedFix", "Google init");
 	}
@@ -199,6 +200,10 @@ ConnectionCallbacks, OnConnectionFailedListener {
 		}
 	}
 	
+	public Person getUser() {
+		return Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+	}
+	
 	// ###########################
 	
 	/**
@@ -207,6 +212,7 @@ ConnectionCallbacks, OnConnectionFailedListener {
 	private void signInWithGplus() {
 		if (!mGoogleApiClient.isConnecting()) {
 			mSignInClicked = true;
+			mGoogleApiClient.connect();
 			resolveSignInError();
 		}
 	}
