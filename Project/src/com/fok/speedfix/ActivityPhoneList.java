@@ -31,7 +31,7 @@ public class ActivityPhoneList extends Activity {
 				"Samsung" ,
 				"Vodafone"
 		};
-		((ListView)findViewById(R.id.listView1)).setAdapter(new PhoneListAdapter(this, R.id.textView1, Arrays.asList(array)));
+		((ListView)findViewById(R.id.listViewPhones)).setAdapter(new PhoneListAdapter(this, R.id.textView1, Arrays.asList(array)));
 	}
 	
 	public void test(View v) {

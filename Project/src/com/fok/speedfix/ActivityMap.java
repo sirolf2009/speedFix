@@ -1,6 +1,7 @@
 package com.fok.speedfix;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -8,6 +9,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -17,12 +20,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
 
 public class ActivityMap extends BaseMapActivity {
+	
     private Marker yourLocation;
+    private ListView lv;
+
     private String[] locations = {"Apollostraat rotterdam nederland", "Westzeedijk rotterdam nederland", "vierambachtstraat rotterdam nederland", "Zwartjanstraat rotterdam nederland", "Bloemstraat rotterdamn nederland", "Straatweg rotterdam nederland", "Kleiweg rotterdam nederland", "Gordelweg rotterdam nederland", "Kalverstraat amsterdam nederland", "Henry Dunantlaan Barendrecht Nederland"};
     private String[] bizNames = {"PhoneRepair", "PhoneRepairPro", "PhoneRepairSuperPro", "PhoneRepairDoublePro", "PhoneRepairer", "PhoneRepairBuddy", "PhoneRepairBro", "PhoneRepairDad", "PhoneRepairGod", "PhoneRepairKing"};
     private String[] description = {"Apollostraat 11", "Westzeedijk 12", "Vierambachtstraat 13", "Zwartjanstraat 14", "Bloemstraat 15", "Straatweg 16", "Kleiweg 17", "Gordelweg 18", "Kalverstraat 19", "Henry Dunantlaan 20"};
     private double[] ranges = new double[locations.length];
     private Marker[] locMarkers = new Marker[locations.length];
+    private List<String> selectedCompanies = new ArrayList<String>();
 
     @Override
     protected int getLayoutId() {
@@ -45,11 +52,12 @@ public class ActivityMap extends BaseMapActivity {
         int distanceToLookFor = 5001;
         boolean hitFound = false;
         while (!hitFound) {
-	        for(int i = 1; i < locations.length; i++) {	
+	        for(int i = 0; i < locations.length; i++) {	
 	        	LatLng targetXY = getLocation(locations[i], geocoder);
 	        	ranges[i] = getLatLngDistance(yourLocation.getPosition(), targetXY);
 	        	if(ranges[i] < distanceToLookFor) {
 	        		locMarkers[i] = getMap().addMarker(new MarkerOptions().position(targetXY).title(bizNames[i]).snippet(description[i]));
+	        		selectedCompanies.add(bizNames[i]);
 	        		hitFound = true;
 	        	}
 	        }
@@ -57,6 +65,13 @@ public class ActivityMap extends BaseMapActivity {
 	        if (distanceToLookFor > 25000) {
 	        	break;
 	        }
+	        lv = (ListView) findViewById(R.id.listViewMap);
+	        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+	                 this, 
+	                 android.R.layout.simple_list_item_1,
+	                 selectedCompanies );
+
+	         lv.setAdapter(arrayAdapter); 
         }
     }
     
