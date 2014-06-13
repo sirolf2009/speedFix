@@ -9,6 +9,9 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -19,17 +22,19 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
 
-public class ActivityMap extends BaseMapActivity {
-	
+public class ActivityMap extends ActivityBaseMap {
+
     private Marker yourLocation;
     private ListView lv;
 
-    private String[] locations = {"Apollostraat rotterdam nederland", "Westzeedijk rotterdam nederland", "vierambachtstraat rotterdam nederland", "Zwartjanstraat rotterdam nederland", "Bloemstraat rotterdamn nederland", "Straatweg rotterdam nederland", "Kleiweg rotterdam nederland", "Gordelweg rotterdam nederland", "Kalverstraat amsterdam nederland", "Henry Dunantlaan Barendrecht Nederland"};
+    private final String COUNTRY = "Nederland";
+    private String[] locations = {"rotterdam", "rotterdam", "rotterdam", "rotterdam", "rotterdamn", "rotterdam", "rotterdam", "rotterdam", "amsterdam", "Barendrecht"};
     private String[] bizNames = {"PhoneRepair", "PhoneRepairPro", "PhoneRepairSuperPro", "PhoneRepairDoublePro", "PhoneRepairer", "PhoneRepairBuddy", "PhoneRepairBro", "PhoneRepairDad", "PhoneRepairGod", "PhoneRepairKing"};
     private String[] description = {"Apollostraat 11", "Westzeedijk 12", "Vierambachtstraat 13", "Zwartjanstraat 14", "Bloemstraat 15", "Straatweg 16", "Kleiweg 17", "Gordelweg 18", "Kalverstraat 19", "Henry Dunantlaan 20"};
     private double[] ranges = new double[locations.length];
     private Marker[] locMarkers = new Marker[locations.length];
     private List<String> selectedCompanies = new ArrayList<String>();
+    private List<LatLng> companyLocations = new ArrayList<LatLng>();
 
     @Override
     protected int getLayoutId() {
@@ -53,11 +58,12 @@ public class ActivityMap extends BaseMapActivity {
         boolean hitFound = false;
         while (!hitFound) {
 	        for(int i = 0; i < locations.length; i++) {	
-	        	LatLng targetXY = getLocation(locations[i], geocoder);
+	        	LatLng targetXY = getLocation(description[i] + " " + locations[i] + " " + COUNTRY, geocoder);
 	        	ranges[i] = getLatLngDistance(yourLocation.getPosition(), targetXY);
 	        	if(ranges[i] < distanceToLookFor) {
 	        		locMarkers[i] = getMap().addMarker(new MarkerOptions().position(targetXY).title(bizNames[i]).snippet(description[i]));
 	        		selectedCompanies.add(bizNames[i]);
+	        		companyLocations.add(targetXY);
 	        		hitFound = true;
 	        	}
 	        }
@@ -70,9 +76,23 @@ public class ActivityMap extends BaseMapActivity {
 	                 this, 
 	                 android.R.layout.simple_list_item_1,
 	                 selectedCompanies );
-
 	         lv.setAdapter(arrayAdapter); 
         }
+        lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        
+        lv.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
+              String selectedFromList =(String) (lv.getItemAtPosition(myItemInt));
+              int location = 0;
+              for (String s : selectedCompanies) {
+            	  if (s == selectedFromList) {
+            		  getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(companyLocations.get(location), 13));
+            	  }
+            	  location++;
+              }
+              location = 0;
+            }                 
+      });
     }
     
     private double getLatLngDistance(LatLng posOne, LatLng posTwo) {
@@ -118,4 +138,5 @@ public class ActivityMap extends BaseMapActivity {
         LatLng City = new LatLng(latitude, longitude);
         return City;
     }
+
 }

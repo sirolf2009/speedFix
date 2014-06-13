@@ -30,9 +30,9 @@ public class ActivityCompanyList extends Activity {
 		        .setContentText("wants to fix your device!")
 		        .setAutoCancel(true);
 		
-		Intent resultIntent = new Intent(context, MainActivity.class); //TODO resultactivity
+		Intent resultIntent = new Intent(context, ActivityMap.class);
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-		stackBuilder.addParentStack(MainActivity.class);
+		stackBuilder.addParentStack(ActivityMap.class);
 		stackBuilder.addNextIntent(resultIntent);
 		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 		mBuilder.setContentIntent(resultPendingIntent);

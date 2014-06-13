@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
-public abstract class BaseMapActivity extends FragmentActivity {
+public abstract class ActivityBaseMap extends FragmentActivity {
     private GoogleMap mMap;
 
     protected int getLayoutId() {
