@@ -58,6 +58,13 @@ public class ActivityEditUser extends Activity {
     private static final String TAG_NAME = "name";
     private static final String TAG_PRICE = "price";
     private static final String TAG_DESCRIPTION = "description";
+    
+    // PK ## user_id
+    //       user_name
+    //       user_email
+    //		 user_created
+    // FK ## device_id
+    
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
