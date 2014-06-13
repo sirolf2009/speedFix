@@ -46,6 +46,7 @@ public class ActivityMap extends ActivityBaseMap {
         Geocoder geocoder = new Geocoder(this);
 
         getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(51.9166667, 4.5), 10));
+        getMap().setInfoWindowAdapter(new InfoWinAdapt(getLayoutInflater()));
         
         double loc[] = getlocation();
 

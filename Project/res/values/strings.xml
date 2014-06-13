@@ -6,5 +6,7 @@
     <color name="clrWhite">#FFFFFF</color>
     <color name="clrDarkGray">#333542</color>
     <color name="clrDarkRed">#4F0101</color>
+    
+    <string name="icon">speedFix logo</string>
 
 </resources>
