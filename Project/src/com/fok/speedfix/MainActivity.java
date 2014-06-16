@@ -26,12 +26,15 @@ public class MainActivity extends Activity {
 		
 		plus = new GooglePlus();
 		plus.signInWithGplus(instance);
-		
 	}
 
 	public void openMap(View view) {
 		Intent intent = new Intent(this, ActivityMap.class);
 		startActivity(intent);
+	}
+	
+	public void onPhoneInfoClicked(View view) {
+		startActivity(new Intent(this, ActivityPhoneInfo.class));
 	}
 
 	

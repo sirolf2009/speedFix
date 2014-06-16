@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.fok.speedfix.MainActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -160,6 +161,12 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 			if (mSignInClicked) {
 				resolveSignInError();
 			}
+		}
+	}
+	
+	public static void updateTitleBar(Activity activity) {
+		if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+			activity.setTitle(activity.getTitle()+" - "+MainActivity.plus.getUser().getDisplayName());
 		}
 	}
 

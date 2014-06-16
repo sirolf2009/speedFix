@@ -1,5 +1,7 @@
 package com.fok.speedfix;
 
+import com.fok.speedfix.util.GooglePlus;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Bundle;
@@ -25,6 +27,8 @@ public class ActivityPhoneInfo extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_phone_info);
+		
+		GooglePlus.updateTitleBar(this);
 		
 		// Reference
 		Board = (TextView) findViewById(R.id.id_board);

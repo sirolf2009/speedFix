@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.fok.speedfix.util.GooglePlus;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,6 +44,7 @@ public class ActivityMap extends ActivityBaseMap {
 
     @Override
     protected void startMap() {
+    	GooglePlus.updateTitleBar(this);
         Geocoder geocoder = new Geocoder(this);
 
         getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(51.9166667, 4.5), 10));

@@ -3,6 +3,7 @@ package com.fok.speedfix;
 import java.util.Arrays;
 import java.util.Set;
 
+import com.fok.speedfix.util.GooglePlus;
 import com.fok.speedfix.util.PhoneListAdapter;
 import com.fok.speedfix.util.Storage;
 
@@ -25,7 +26,7 @@ public class ActivityPhoneList extends Activity {
 	public void onCreate(Bundle saved) {
 		super.onCreate(saved);
 		setContentView(R.layout.phone_list);
-		
+		GooglePlus.updateTitleBar(this);
 		String[] array = new String[] {
 				"Samsung" ,
 				"Samsung" ,
