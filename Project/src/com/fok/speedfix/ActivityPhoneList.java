@@ -1,9 +1,11 @@
 package com.fok.speedfix;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 
 import com.fok.speedfix.util.GooglePlus;
+import com.fok.speedfix.util.Helper;
 import com.fok.speedfix.util.PhoneListAdapter;
 import com.fok.speedfix.util.Storage;
 
@@ -59,15 +61,16 @@ public class ActivityPhoneList extends Activity {
 		mNotificationManager.notify(0, mBuilder.build());
 	}
 	
-	public static void notifyIfNewEngineer(Context context, Set<String> engineers) {
-		Set<String> saved = Storage.readEngineers(context);
-		for(String string : engineers) {
+	public static void notifyIfNewPhone(Context context, Set<String> phones) {
+		Set<String> saved = Storage.readPhones(context);
+		for(String string : phones) {
 			if(!saved.contains(string)) {
-				createNotification(string, context);
+				Map<String, String> phoneInfo = Helper.decipherPhone(string);
+				createNotification(phoneInfo.get("brand") + " " + phoneInfo.get("component"), context);
 				saved.add(string);
 			}
 		}
-		Storage.saveEngineers(saved, context);
+		Storage.savePhones(saved, context);
 	}
 	
 }

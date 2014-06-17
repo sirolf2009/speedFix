@@ -14,4 +14,10 @@
     <string name="name">name</string>
     <string name="query">Start Qu</string>
     
+    <string-array name="components">
+        <item>Screen</item>
+        <item>Case</item>
+        <item>Other</item>
+    </string-array>
+    
 </resources>

@@ -14,6 +14,9 @@ public class Storage {
 
 	private static final String phonesFile = "com.fok.speedfix.phones";
 	private static final String phonesKey = "phones";
+	
+	private static final String phoneIDFile = "com.fok.speedfix.phoneID";
+	private static final String phoneIDKey = "phoneID";
 
 	public static void saveEngineers(Set<String> engineers, Context context) {
 		SharedPreferences sharedPref = context.getSharedPreferences(engineersFile, Context.MODE_PRIVATE);
@@ -29,17 +32,31 @@ public class Storage {
 		return sharedPref.getStringSet(engineersKey, null);
 	}
 	
-	public static void savePhones(Set<String> engineers, Context context) {
+	public static void savePhones(Set<String> phones, Context context) {
 		SharedPreferences sharedPref = context.getSharedPreferences(phonesFile, Context.MODE_PRIVATE);
 		sharedPref.edit().clear();
-		sharedPref.edit().putStringSet(phonesKey, engineers);
+		sharedPref.edit().putStringSet(phonesKey, phones);
 		if(!sharedPref.edit().commit()) {
-			Log.e("Could not save "+engineers+" to "+phonesFile+" with key "+phonesKey);
+			Log.e("Could not save "+phones+" to "+phonesFile+" with key "+phonesKey);
 		}
 	}
 
 	public static Set<String> readPhones(Context context) {
 		SharedPreferences sharedPref = context.getSharedPreferences(phonesFile, Context.MODE_PRIVATE);
 		return sharedPref.getStringSet(phonesKey, null);
+	}
+	
+	public static void savePhoneID(long ID, Context context) {
+		SharedPreferences sharedPref = context.getSharedPreferences(phoneIDFile, Context.MODE_PRIVATE);
+		sharedPref.edit().clear();
+		sharedPref.edit().putLong(phoneIDKey, ID);
+		if(!sharedPref.edit().commit()) {
+			Log.e("Could not save "+ID+" to "+phoneIDFile+" with key "+phoneIDKey);
+		}
+	}
+	
+	public static long readPhoneID(Context context) {
+		SharedPreferences sharedPref = context.getSharedPreferences(phoneIDFile, Context.MODE_PRIVATE);
+		return sharedPref.getLong(phoneIDKey, 0);
 	}
 }

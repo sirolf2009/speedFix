@@ -1,10 +1,12 @@
 package com.fok.speedfix;
 
-import com.fok.speedfix.util.GooglePlus;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.fok.speedfix.services.ServiceDatabase;
+import com.fok.speedfix.util.GooglePlus;
 
 public class MainActivity extends Activity {
 
@@ -26,6 +28,12 @@ public class MainActivity extends Activity {
 		
 		plus = new GooglePlus();
 		plus.signInWithGplus(instance);
+		
+		startService(new Intent(this, ServiceDatabase.class));
+	}
+	
+	public void repairPhone(View view) {
+		startActivity(new Intent(this, ActivityRepairPhone.class));
 	}
 
 	public void openMap(View view) {

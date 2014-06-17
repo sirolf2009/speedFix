@@ -3,12 +3,22 @@ package com.fok.speedfix;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import android.annotation.TargetApi;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -16,6 +26,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.fok.speedfix.util.GooglePlus;
+import com.fok.speedfix.util.Helper;
+import com.fok.speedfix.util.Storage;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -37,6 +49,36 @@ public class ActivityMap extends ActivityBaseMap {
     private List<String> selectedCompanies = new ArrayList<String>();
     private List<LatLng> companyLocations = new ArrayList<LatLng>();
 
+    @Override
+    public void onCreate(Bundle saved) {
+    	Intent intent = getIntent();
+    	if(intent.hasExtra("locations")) {
+    		locations = intent.getStringArrayExtra("locations");
+    		bizNames = intent.getStringArrayExtra("bizNames");
+    		description = intent.getStringArrayExtra("description");
+    		ranges = new double[locations.length];
+    	    locMarkers = new Marker[locations.length];
+    	} else {
+    		List<String> names = new ArrayList<String>();
+    		List<String> streets = new ArrayList<String>();
+    		List<String> locations = new ArrayList<String>();
+    		Set<String> engineers = Storage.readEngineers(this);
+    		if(engineers == null) {
+    			return;
+    		}
+    		for(String engineer : engineers) {
+    			Map<String, String> engineerData = Helper.decipherEngineer(engineer);
+    			names.add(engineerData.get("name"));
+    			streets.add(engineerData.get("street"));
+    			locations.add(engineerData.get("location"));
+    		}
+    		bizNames = (String[]) names.toArray();
+    		description = (String[]) names.toArray();
+    		this.locations = (String[]) locations.toArray();
+    	}
+    	super.onCreate(saved);
+    }
+    
     @Override
     protected int getLayoutId() {
         return R.layout.distance;
@@ -141,5 +183,38 @@ public class ActivityMap extends ActivityBaseMap {
         LatLng City = new LatLng(latitude, longitude);
         return City;
     }
+    
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+	public static void createNotification(String companyName, Context context) {
+		NotificationCompat.Builder mBuilder =
+		        new NotificationCompat.Builder(context)
+		        .setSmallIcon(R.drawable.logo)
+		        .setContentTitle(companyName)
+		        .setContentText("wants to fix your device!")
+		        .setAutoCancel(true);
+		
+		Intent resultIntent = new Intent(context, ActivityMap.class);
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+		stackBuilder.addParentStack(ActivityMap.class);
+		stackBuilder.addNextIntent(resultIntent);
+		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(resultPendingIntent);
+		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(MainActivity.NOTIFICATION_SERVICE);
+		mNotificationManager.notify(0, mBuilder.build());
+	}
+	
+	public static void notifyIfNewEngineer(Context context, Set<String> engineers) {
+		Set<String> saved = Storage.readEngineers(context);
+		if(saved == null) {
+			return;
+		}
+		for(String string : engineers) {
+			if(!saved.contains(string)) {
+				createNotification(string, context);
+				saved.add(string);
+			}
+		}
+		Storage.saveEngineers(saved, context);
+	}
 
 }

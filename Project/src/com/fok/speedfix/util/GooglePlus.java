@@ -136,9 +136,7 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 	@Override
 	public void onConnected(Bundle arg0) {
 		mSignInClicked = false;
-		Toast.makeText(activity, "User is connected!", Toast.LENGTH_LONG).show();
 		activity.setTitle(activity.getTitle()+" - "+getUser().getDisplayName());
-		Log.i(getUser().toString());
 	}
 	
 	public Person getUser() {
