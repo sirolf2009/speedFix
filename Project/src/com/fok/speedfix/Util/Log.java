@@ -26,7 +26,19 @@ public class Log {
 		} else {
 			String msg = "";
 			for(int i = 0; i < list.size(); i++) {
-				msg += list.get(i);
+				msg += "#"+i+" "+list.get(i)+", ";
+			}
+			i(msg);
+		}
+	}
+	
+	public static void i(String[] array) {
+		if(array.length == 0) {
+			i("Empty array");
+		} else {
+			String msg = "";
+			for(int i = 0; i < array.length; i++) {
+				msg += "#"+i+" "+array[i]+", ";
 			}
 			i(msg);
 		}

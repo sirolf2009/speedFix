@@ -2,6 +2,7 @@ package com.fok.speedfix;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +28,7 @@ import android.widget.ListView;
 
 import com.fok.speedfix.util.GooglePlus;
 import com.fok.speedfix.util.Helper;
+import com.fok.speedfix.util.Log;
 import com.fok.speedfix.util.Storage;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -61,7 +63,7 @@ public class ActivityMap extends ActivityBaseMap {
 			ranges = new double[locations.length];
 			locMarkers = new Marker[locations.length];
 		} else {
-			List<String> names = new ArrayList<String>();
+			ArrayList<String> names = new ArrayList<String>();
 			List<String> streets = new ArrayList<String>();
 			List<String> locations = new ArrayList<String>();
 			Set<String> engineers = Storage.readEngineers(this);
@@ -70,14 +72,24 @@ public class ActivityMap extends ActivityBaseMap {
 			}
 			for(String engineer : engineers) {
 				Map<String, String> engineerData = Helper.decipherEngineer(engineer);
-				names.add(engineerData.get("name"));
-				streets.add(engineerData.get("street"));
-				locations.add(engineerData.get("location"));
+				names.add(engineerData.get("zak_bedrijfsnaam"));
+				streets.add(engineerData.get("zak_straat")+engineerData.get("zak_huisnummer"));
+				locations.add(engineerData.get("zak_plaats"));
 			}
-			bizNames = (String[]) names.toArray();
-			description = (String[]) names.toArray();
-			this.locations = (String[]) locations.toArray();
+			bizNames = new String[names.size()];
+			names.toArray(bizNames);
+			Log.i(bizNames);
+			description = new String[streets.size()];
+			streets.toArray(description);
+			Log.i(description);
+			this.locations = new String[locations.size()];
+			locations.toArray(this.locations);
+			Log.i(this.locations);
+
+			ranges = new double[this.locations.length];
+			locMarkers = new Marker[this.locations.length];
 		}
+		geocoder = new Geocoder(this);
 		super.onCreate(saved);
 	}
 
@@ -105,6 +117,9 @@ public class ActivityMap extends ActivityBaseMap {
 		while (!hitFound) {
 			for(int i = 0; i < locations.length; i++) {	
 				LatLng targetXY = getLocation(description[i] + " " + locations[i] + " " + COUNTRY, geocoder);
+				if(targetXY == null) {
+					continue;
+				}
 				ranges[i] = getLatLngDistance(yourLocation.getPosition(), targetXY);
 				if(ranges[i] < distanceToLookFor) {
 					locMarkers[i] = getMap().addMarker(new MarkerOptions().position(targetXY).title(bizNames[i]).snippet(description[i]));
@@ -173,10 +188,14 @@ public class ActivityMap extends ActivityBaseMap {
 		while(addresses==null){
 			try {
 				addresses = geo.getFromLocationName(s, 1);
-
+				Log.i(addresses);
+				Log.i(s);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		if(addresses.size() == 0) {
+			return null;
 		}
 		Address address = addresses.get(0);
 		latitude = address.getLatitude();
@@ -204,20 +223,23 @@ public class ActivityMap extends ActivityBaseMap {
 		mNotificationManager.notify(0, mBuilder.build());
 	}
 
-	public static void notifyIfNewEngineer(Context context, Set<String> engineers) {
+	public static void notifyIfNewEngineer(Context context, Iterable<String> engineers) {
 		Set<String> saved = Storage.readEngineers(context);
 		if(saved == null) {
-			return;
+			saved = new HashSet<String>();
 		}
 		for(String string : engineers) {
+			Log.i("checking: "+string);
 			if(!saved.contains(string)) {
-				Map<String, String> engineerData = Helper.decipherEngineer(string);
+				/*Map<String, String> engineerData = Helper.decipherEngineer(string);
 				LatLng bussinesLoc = getLocation(engineerData.get("street")+" "+engineerData.get("name")+" "+COUNTRY, geocoder);
 				double[] loc = getlocation(context);
 				LatLng myLoc = new LatLng(loc[0], loc[1]);
+				Log.i("within distance? "+getLatLngDistance(bussinesLoc, myLoc));
 				if(getLatLngDistance(bussinesLoc, myLoc) < 5000) {
-					createNotification(string, context);
-				}
+					Log.i("within distance");
+				}*/
+				createNotification(string, context);
 				saved.add(string);
 			}
 		}

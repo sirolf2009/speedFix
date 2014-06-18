@@ -1,13 +1,10 @@
 package com.fok.speedfix;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.fok.speedfix.util.GooglePlus;
-import com.fok.speedfix.util.Helper;
-import com.fok.speedfix.util.PhoneListAdapter;
-import com.fok.speedfix.util.Storage;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -20,7 +17,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.fok.speedfix.util.GooglePlus;
+import com.fok.speedfix.util.Helper;
+import com.fok.speedfix.util.PhoneListAdapter;
+import com.fok.speedfix.util.Storage;
 
 public class ActivityPhoneList extends Activity {
 
@@ -29,12 +33,26 @@ public class ActivityPhoneList extends Activity {
 		super.onCreate(saved);
 		setContentView(R.layout.phone_list);
 		GooglePlus.updateTitleBar(this);
-		String[] array = new String[] {
-				"Samsung" ,
-				"Samsung" ,
-				"Vodafone"
-		};
-		((ListView)findViewById(R.id.listViewPhones)).setAdapter(new PhoneListAdapter(this, R.id.textView1, Arrays.asList(array)));
+		
+		Set<String> phonesRaw = Storage.readPhones(this);
+		List<Map<String, String>> phones = new ArrayList<Map<String, String>>();
+		if(phonesRaw == null) {
+			phonesRaw = new HashSet<String>();
+		}
+		for(String phone : phonesRaw) {
+			phones.add(Helper.decipherPhone(phone));
+		}
+		List<String> brands = new ArrayList<String>();
+		for(Map<String, String> phone : phones) {
+			brands.add(phone.get("device_brand"));
+		}
+		((ListView)findViewById(R.id.listViewPhones)).setAdapter(new PhoneListAdapter(this, R.id.textView1, brands, phones));
+		((ListView)findViewById(R.id.listViewPhones)).setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				
+			}
+		});
 	}
 	
 	public void test(View v) {
@@ -61,16 +79,22 @@ public class ActivityPhoneList extends Activity {
 		mNotificationManager.notify(0, mBuilder.build());
 	}
 	
-	public static void notifyIfNewPhone(Context context, Set<String> phones) {
+	public static void notifyIfNewPhone(Context context, Iterable<String> phones) {
 		Set<String> saved = Storage.readPhones(context);
 		for(String string : phones) {
-			if(!saved.contains(string)) {
+			if(saved == null) {
 				Map<String, String> phoneInfo = Helper.decipherPhone(string);
-				createNotification(phoneInfo.get("brand") + " " + phoneInfo.get("component"), context);
+				saved = new HashSet<String>();
 				saved.add(string);
+				Storage.savePhones(saved, context);
+				createNotification(phoneInfo.get("device_brand") + " " + phoneInfo.get("device_component"), context);
+			} else if(!saved.contains(string)) {
+				Map<String, String> phoneInfo = Helper.decipherPhone(string);
+				saved.add(string);
+				Storage.savePhones(saved, context);
+				createNotification(phoneInfo.get("device_brand") + " " + phoneInfo.get("device_component"), context);
 			}
 		}
-		Storage.savePhones(saved, context);
 	}
 	
 }

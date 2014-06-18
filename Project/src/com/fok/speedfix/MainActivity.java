@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.fok.speedfix.services.ServiceDatabase;
 import com.fok.speedfix.util.GooglePlus;
+import com.fok.speedfix.util.Log;
 
 public class MainActivity extends Activity {
 
@@ -43,6 +44,11 @@ public class MainActivity extends Activity {
 	
 	public void onPhoneInfoClicked(View view) {
 		startActivity(new Intent(this, ActivityPhoneInfo.class));
+	}
+	
+	public void onPhoneListClicked(View v) {
+		Log.i("intenting phone list");
+		startActivity(new Intent(this, ActivityPhoneList.class));
 	}
 
 	

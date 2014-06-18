@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignTop="@+id/Button01"
-        android:text="Mijn Reviews"
+        android:text="Phone List"
         android:textColor="@color/clrWhite"
         android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
         android:layout_alignLeft="@+id/TextView02"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/TextView02"
-        android:text="Een overzicht van uw beoordelingen"
+        android:text="Phn'glui m'gawn cthulhu r'lyeh f'taghn"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/clrWhite" />
 
@@ -135,7 +135,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="16dp"
-        android:layout_toLeftOf="@+id/textView1" />
+        android:layout_toLeftOf="@+id/textView1"
+        android:onClick="onPhoneListClicked" />
 
     <Button
         android:id="@+id/button2"

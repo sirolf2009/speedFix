@@ -14,17 +14,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public abstract class JSONHandler extends AsyncTask<String, String, String> {
-
-	// Progress Dialog
-	private ProgressDialog pDialog;
-
-	private Context context;
+public abstract class JSONDownloaderHandler extends AsyncTask<String, String, String> {
 
 	// Creating JSON Parser object
 	JSONParser jParser = new JSONParser();
@@ -38,8 +31,7 @@ public abstract class JSONHandler extends AsyncTask<String, String, String> {
 
 	private String[] cols; 
 
-	public JSONHandler (Context context, String url, String tag_name, String... cols) {
-		this.context = context;
+	public JSONDownloaderHandler (String url, String tag_name, String... cols) {
 		this.url = url;
 		this.tag_name = tag_name;
 		this.cols = cols;
@@ -52,11 +44,11 @@ public abstract class JSONHandler extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		pDialog = new ProgressDialog(context);
-		pDialog.setMessage("Loading users. Please wait...");
-		pDialog.setIndeterminate(false);
-		pDialog.setCancelable(false);
-		pDialog.show();
+//		pDialog = new ProgressDialog(context);
+//		pDialog.setMessage("Loading users. Please wait...");
+//		pDialog.setIndeterminate(false);
+//		pDialog.setCancelable(false);
+//		pDialog.show();
 	}
 
 	/**
@@ -127,7 +119,7 @@ public abstract class JSONHandler extends AsyncTask<String, String, String> {
 	 * **/
 	protected void onPostExecute(String file_url) {
 		// dismiss the dialog after getting all products
-		pDialog.dismiss();
+		//pDialog.dismiss();
 		data(rowDataList);
 		/*// updating UI from Background Thread
 		runOnUiThread(new Runnable() {
