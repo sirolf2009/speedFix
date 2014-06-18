@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import com.fok.speedfix.ActivityMap;
+import com.fok.speedfix.ActivityPhoneList;
 import com.fok.speedfix.util.Log;
 
 public class ServiceDatabase extends Service {
@@ -17,7 +18,6 @@ public class ServiceDatabase extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		instance = this;
 		new Thread(new Runnable() {
-			
 			@Override
 			public void run() {
 				while(true) {
@@ -34,6 +34,7 @@ public class ServiceDatabase extends Service {
 
 	public void retrieveBrokenPhonesFromDatabase() {
 		//Collect
+		ActivityPhoneList.notifyIfNewPhone(instance, null);
 	}
 
 	public void retrieveAvailabeEngineersFromDatabase() {

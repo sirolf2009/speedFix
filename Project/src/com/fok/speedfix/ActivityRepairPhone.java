@@ -3,8 +3,6 @@ package com.fok.speedfix;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fok.speedfix.services.ServiceDatabase;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
@@ -12,7 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
+
+import com.fok.speedfix.services.ServiceDatabase;
 
 public class ActivityRepairPhone extends Activity {
 
