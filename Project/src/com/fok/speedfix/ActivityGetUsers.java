@@ -37,19 +37,20 @@ public class ActivityGetUsers extends ListActivity {
     // Creating JSON Parser object
     JSONParser jParser = new JSONParser();
  
-    ArrayList<HashMap<String, String>> productsList;
+    ArrayList<HashMap<String, String>> userList;
  
-    // url to get all products list
-    private static String url_all_products = "http://185.27.141.17/android/get_all_products.php";
+    // url to get all users list
+    private static String url_all_users = "http://185.27.141.17/android/get_users_zak.php";
  
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PRODUCTS = "products";
-    private static final String TAG_PID = "pid";
-    private static final String TAG_NAME = "name";
- 
+    private static final String TAG_USERS = "users_zak";
+    private static final String TAG_ZAK_ID = "zak_id";
+    private static final String TAG_BEDRIJF = "zak_bedrijfsnaam";
+
+    
     // products JSONArray
-    JSONArray products = null;
+    JSONArray users = null;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,30 +58,29 @@ public class ActivityGetUsers extends ListActivity {
         setContentView(R.layout.user_all);
  
         // Hashmap for ListView
-        productsList = new ArrayList<HashMap<String, String>>();
+        userList = new ArrayList<HashMap<String, String>>();
  
-        // Loading products in Background Thread
-        new LoadAllProducts().execute();
+        // Loading users in Background Thread
+        new LoadAllUsers().execute();
  
         // Get listview
         ListView lv = getListView();
  
-        // on seleting single product
+        // on selecting single product
         // launching Edit Product Screen
         lv.setOnItemClickListener(new OnItemClickListener() {
  
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            	
                 // getting values from selected ListItem
-                String pid = ((TextView) view.findViewById(R.id.pid)).getText()
-                        .toString();
+                String zak_id = ((TextView) view.findViewById(R.id.zak_id)).getText().toString();
  
                 // Starting new intent
-                Intent in = new Intent(getApplicationContext(),
-                        ActivityEditUser.class);
+                Intent in = new Intent(getApplicationContext(), ActivityEditUser.class);
+                
                 // sending pid to next activity
-                in.putExtra(TAG_PID, pid);
+                in.putExtra(TAG_ZAK_ID, zak_id);
  
                 // starting new activity and expecting some response back
                 startActivityForResult(in, 100);
@@ -108,7 +108,7 @@ public class ActivityGetUsers extends ListActivity {
     /**
      * Background Async Task to Load all product by making HTTP Request
      * */
-    class LoadAllProducts extends AsyncTask<String, String, String> {
+    class LoadAllUsers extends AsyncTask<String, String, String> {
  
         /**
          * Before starting background thread Show Progress Dialog
@@ -117,23 +117,26 @@ public class ActivityGetUsers extends ListActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(ActivityGetUsers.this);
-            pDialog.setMessage("Loading products. Please wait...");
+            pDialog.setMessage("Loading Users. Please wait...");
+            
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
         }
  
         /**
-         * getting All products from url
+         * getting All users from url
          * */
         protected String doInBackground(String... args) {
+        	
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+            
             // getting JSON string from URL
-            JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
+            JSONObject json = jParser.makeHttpRequest(url_all_users, "GET", params);
  
             // Check your log cat for JSON reponse
-            Log.d("All Products: ", json.toString());
+            Log.d("All users: ", json.toString());
  
             try {
                 // Checking for SUCCESS TAG
@@ -142,25 +145,25 @@ public class ActivityGetUsers extends ListActivity {
                 if (success == 1) {
                     // products found
                     // Getting Array of Products
-                    products = json.getJSONArray(TAG_PRODUCTS);
+                    users = json.getJSONArray(TAG_USERS);
  
                     // looping through All Products
-                    for (int i = 0; i < products.length(); i++) {
-                        JSONObject c = products.getJSONObject(i);
+                    for (int i = 0; i < users.length(); i++) {
+                        JSONObject c = users.getJSONObject(i);
  
                         // Storing each json item in variable
-                        String id = c.getString(TAG_PID);
-                        String name = c.getString(TAG_NAME);
+                        String id = c.getString(TAG_ZAK_ID);
+                        String name = c.getString(TAG_BEDRIJF);
  
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
  
                         // adding each child node to HashMap key => value
-                        map.put(TAG_PID, id);
-                        map.put(TAG_NAME, name);
+                        map.put(TAG_ZAK_ID, id);
+                        map.put(TAG_BEDRIJF, name);
  
                         // adding HashList to ArrayList
-                        productsList.add(map);
+                        userList.add(map);
                     }
                 } else {
                     // no products found
@@ -191,10 +194,10 @@ public class ActivityGetUsers extends ListActivity {
                      * Updating parsed JSON data into ListView
                      * */
                     ListAdapter adapter = new SimpleAdapter(
-                    		ActivityGetUsers.this, productsList,
-                            R.layout.user_list, new String[] { TAG_PID,
-                                    TAG_NAME},
-                            new int[] { R.id.pid, R.id.name });
+                    		ActivityGetUsers.this, userList,
+                            R.layout.user_list, new String[] { TAG_ZAK_ID,
+                                    TAG_BEDRIJF},
+                            new int[] { R.id.zak_id, R.id.zak_bedrijfsnaam });
                     // updating listview
                     setListAdapter(adapter);
                 }

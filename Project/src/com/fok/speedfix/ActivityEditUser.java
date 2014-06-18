@@ -43,7 +43,8 @@ public class ActivityEditUser extends Activity {
     JSONParser jsonParser = new JSONParser();
  
     // single product url
-    private static final String url_product_detials = "http://185.27.141.17/android/get_product_details.php";
+    // private static final String url_product_detials = "http://185.27.141.17/android/get_product_details.php";
+    private static final String url_user_details = "http://185.27.141.17/android/get_user_details.php";
  
     // url to update product
     private static final String url_update_product = "http://185.27.141.17/android/update_product.php";
@@ -143,7 +144,7 @@ public class ActivityEditUser extends Activity {
                         // getting product details by making HTTP request
                         // Note that product details url will use GET request
                         JSONObject json = jsonParser.makeHttpRequest(
-                                url_product_detials, "GET", params);
+                        		url_user_details, "GET", params);
  
                         // check your log for json response
                         Log.d("Single Product Details", json.toString());

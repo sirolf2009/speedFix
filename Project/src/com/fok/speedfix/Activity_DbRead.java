@@ -36,18 +36,18 @@ public class Activity_DbRead extends Activity {
 		webview.setWebChromeClient(new WebChromeClient() {
 			
 			public void onProgressChanged(WebView view, int progress) {
-				Toast.makeText(activity, Integer.toString(progress) + "%", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, Integer.toString(progress) + "%", Toast.LENGTH_LONG).show();
 			}
 		}); // webview.setWebChromeClient-END
 		
 		
 		webview.setWebViewClient(new WebViewClient() {
 			public void onReceivedError(WebView view, int errorCode, String description, String FalingUrl) {
-				Toast.makeText(activity, "Error! " + description, Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Error! " + description, Toast.LENGTH_LONG).show();
 			}
 			
 			public void onPageFinished(WebView view, String url) {
-				Toast.makeText(activity, url, Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, url, Toast.LENGTH_LONG).show();
 			}
 		}); // webview.setWebViewClient-END
 		

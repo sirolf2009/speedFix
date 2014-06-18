@@ -4,14 +4,14 @@
     android:orientation="vertical" >
 
     <TextView 
-        android:id="@+id/pid"
+        android:id="@+id/zak_id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
         />
     
     <TextView 
-        android:id="@+id/name"
+        android:id="@+id/zak_bedrijfsnaam"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingTop="6dip"
