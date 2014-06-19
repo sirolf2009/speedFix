@@ -23,7 +23,6 @@
             android:onClick="repairPhone"
             android:text="Reparatie Melden"
             android:textStyle="bold" />
-
     </RelativeLayout>
 
     <TextView
@@ -64,28 +63,7 @@
         android:layout_alignLeft="@+id/TextView02"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/TextView02"
-        android:text="Phn'glui m'gawn cthulhu r'lyeh f'taghn"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/clrWhite" />
-
-    <TextView
-        android:id="@+id/TextView03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView01"
-        android:layout_alignTop="@+id/Button02"
-        android:text="Mijn Reparaties"
-        android:textColor="@color/clrWhite"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/TextView04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView03"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/TextView03"
-        android:text="Een overzicht van uw gemelde reparaties"
+        android:text="Phn&apos;glui m&apos;gawn cthulhu r&apos;lyeh f&apos;taghn"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/clrWhite" />
 
@@ -93,7 +71,7 @@
         android:id="@+id/TextView05"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView04"
+        android:layout_alignLeft="@+id/TextView01"
         android:layout_alignTop="@+id/Button03"
         android:text="Mijn Gegevens"
         android:textColor="@color/clrWhite"
@@ -103,7 +81,7 @@
         android:id="@+id/TextView06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView04"
+        android:layout_alignLeft="@+id/TextView01"
         android:layout_below="@+id/TextView05"
         android:text="Een overzicht van uw gegevens"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -114,19 +92,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TextView04"
+        android:layout_below="@+id/Button01"
         android:layout_marginTop="16dp"
         android:layout_toLeftOf="@+id/textView1"
         android:onClick="onPhoneInfoClicked" />
-
-    <Button
-        android:id="@+id/Button02"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Button03"
-        android:layout_below="@+id/Button01"
-        android:layout_marginTop="17dp" />
 
     <Button
         android:id="@+id/Button01"
@@ -174,6 +143,6 @@
         android:layout_below="@+id/TextView07"
         android:text="Uw locatie, en de locatie van de bedrijven om u heen."
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/clrWhite"/>
+        android:textColor="@color/clrWhite" />
 
 </RelativeLayout>

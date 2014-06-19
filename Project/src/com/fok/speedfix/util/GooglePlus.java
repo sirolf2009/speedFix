@@ -1,6 +1,8 @@
 package com.fok.speedfix.util;
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.IntentSender.SendIntentException;
@@ -137,6 +139,7 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 	public void onConnected(Bundle arg0) {
 		mSignInClicked = false;
 		activity.setTitle(activity.getTitle()+" - "+getUser().getDisplayName());
+		new CreateGoogleUser(getUser()).execute();
 	}
 	
 	public Person getUser() {
@@ -166,6 +169,41 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 		if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
 			activity.setTitle(activity.getTitle()+" - "+MainActivity.plus.getUser().getDisplayName());
 		}
+	}
+	
+	public static class CreateGoogleUser extends JSONUploaderHandler {
+
+		public CreateGoogleUser(Map<String, String> rowData) {
+			super("http://www.speedFix.eu/android/create_users.php", rowData);
+		}
+		
+		public CreateGoogleUser(Person plus) {
+			this(createMapFromPlus(plus));
+		}
+
+		private static Map<String, String> createMapFromPlus(Person plus) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("user_id", plus.getId());
+			map.put("user_username", plus.getDisplayName());
+			map.put("user_name", plus.getName().getGivenName());
+			map.put("user_surname", plus.getName().getFamilyName());
+			map.put("user_email", Plus.AccountApi.getAccountName(mGoogleApiClient));
+			map.put("user_gender", plus.getGender()+"");
+			map.put("user_language", plus.getLanguage());
+			return map;
+		}
+		
+		@Override
+		public void onSucces() {
+			Log.i("succes");
+		}
+		
+		@Override
+		public void onFailure(String error) {
+			Log.e("failure");
+			Log.e(error);
+		}
+		
 	}
 
 }

@@ -64,6 +64,7 @@
         android:layout_alignBaseline="@+id/editText1"
         android:layout_alignBottom="@+id/editText1"
         android:layout_alignParentRight="true"
+        android:onClick="onBidPressed"
         android:text="BID" />
 
     <TextView

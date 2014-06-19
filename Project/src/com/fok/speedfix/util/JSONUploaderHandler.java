@@ -11,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public abstract class JSONUploaderHandler extends AsyncTask<String, String, String> {
 
@@ -47,10 +46,9 @@ public abstract class JSONUploaderHandler extends AsyncTask<String, String, Stri
 
         // getting JSON Object
         // Note that create product url accepts POST method
+        Log.i("starting upload");
         JSONObject json = jsonParser.makeHttpRequest(url, "POST", params);
-
-        // check log cat fro response
-        Log.d("Create Response", json.toString());
+        Log.i("uploaded");
 
         // check for success tag
         try {
@@ -61,16 +59,16 @@ public abstract class JSONUploaderHandler extends AsyncTask<String, String, Stri
                 return TAG_SUCCESS;
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+        	e.printStackTrace();
+        	onFailure(e.getMessage());
         }
-        onFailure();
         return TAG_FAILURE;
     }
     
     public void onSucces() {
     }
     
-    public void onFailure() {
+    public void onFailure(String error) {
     }
 
 }

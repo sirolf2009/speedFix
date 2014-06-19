@@ -14,6 +14,9 @@ public class Log {
 	
 	public static void i(Map<?, ?> map) {
 		String msg = "";
+		if(map == null) {
+			i("null");
+		}
 		for(Map.Entry<?, ?> entry : map.entrySet()) {
 			msg += entry.getKey()+" : "+entry.getValue() + "\n";
 		}

@@ -12,6 +12,7 @@ import com.fok.speedfix.ActivityMap;
 import com.fok.speedfix.ActivityPhoneList;
 import com.fok.speedfix.util.Helper;
 import com.fok.speedfix.util.JSONDownloaderHandler;
+import com.fok.speedfix.util.JSONUploaderHandler;
 import com.fok.speedfix.util.Log;
 
 public class ServiceDatabase extends Service {
@@ -26,9 +27,7 @@ public class ServiceDatabase extends Service {
 			@Override
 			public synchronized void run() {
 				while(true) {
-					Log.i("checking phones");
 					new PhoneListUpdate().execute();
-					Log.i("checking engies");
 					new EngineerListUpdate().execute();
 					try {
 						Thread.sleep(1000*60*10); //10 mins
@@ -46,6 +45,7 @@ public class ServiceDatabase extends Service {
 
 	public void sendPhone(Map<String, String> info) {
 		// TODO fill database
+		new AddBrokenPhone(info).execute();
 		Log.i(info);
 	}
 
@@ -123,10 +123,16 @@ public class ServiceDatabase extends Service {
 			for(Map<String, String> row : data) {
 				engineers.add(Helper.encipherEngineer(row));
 			}
-			Log.i(engineers);
 			ActivityMap.notifyIfNewEngineer(instance, engineers);
 		}
+	}
+	
+	public static class AddBrokenPhone extends JSONUploaderHandler {
 
+		public AddBrokenPhone(Map<String, String> rowData) {
+			super("http://speedFix.eu/android/create_device.php", rowData);
+		}
+		
 	}
 
 }

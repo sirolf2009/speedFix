@@ -1,6 +1,8 @@
 package com.fok.speedfix;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +19,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.fok.speedfix.util.GooglePlus;
 import com.fok.speedfix.util.Helper;
+import com.fok.speedfix.util.JSONDownloaderHandler;
+import com.fok.speedfix.util.JSONUploaderHandler;
 import com.fok.speedfix.util.PhoneListAdapter;
 import com.fok.speedfix.util.Storage;
 
@@ -33,7 +37,7 @@ public class ActivityPhoneList extends Activity {
 		super.onCreate(saved);
 		setContentView(R.layout.phone_list);
 		GooglePlus.updateTitleBar(this);
-		
+
 		Set<String> phonesRaw = Storage.readPhones(this);
 		List<Map<String, String>> phones = new ArrayList<Map<String, String>>();
 		if(phonesRaw == null) {
@@ -47,28 +51,28 @@ public class ActivityPhoneList extends Activity {
 			brands.add(phone.get("device_brand"));
 		}
 		((ListView)findViewById(R.id.listViewPhones)).setAdapter(new PhoneListAdapter(this, R.id.textView1, brands, phones));
-		((ListView)findViewById(R.id.listViewPhones)).setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				
-			}
-		});
 	}
-	
+
 	public void test(View v) {
 		View info = v.findViewById(R.id.moar_info);
 		info.setVisibility(info.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+	}
+	
+	public void onBidPressed(View v) {
+		RelativeLayout layout = (RelativeLayout) v.getParent();
+		EditText bid = (EditText) layout.findViewById(R.id.editText1);
+		new NewBid("-1", Double.parseDouble(bid.getText().toString()));
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	public static void createNotification(String phoneIssue, Context context) {
 		NotificationCompat.Builder mBuilder =
-		        new NotificationCompat.Builder(context)
-		        .setSmallIcon(R.drawable.logo)
-		        .setContentTitle(phoneIssue)
-		        .setContentText("Tap for details")
-		        .setAutoCancel(true);
-		
+				new NotificationCompat.Builder(context)
+		.setSmallIcon(R.drawable.logo)
+		.setContentTitle(phoneIssue)
+		.setContentText("Tap for details")
+		.setAutoCancel(true);
+
 		Intent resultIntent = new Intent(context, ActivityPhoneList.class);
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
 		stackBuilder.addParentStack(ActivityPhoneList.class);
@@ -78,7 +82,7 @@ public class ActivityPhoneList extends Activity {
 		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(MainActivity.NOTIFICATION_SERVICE);
 		mNotificationManager.notify(0, mBuilder.build());
 	}
-	
+
 	public static void notifyIfNewPhone(Context context, Iterable<String> phones) {
 		Set<String> saved = Storage.readPhones(context);
 		for(String string : phones) {
@@ -96,5 +100,49 @@ public class ActivityPhoneList extends Activity {
 			}
 		}
 	}
+
+	public static class GetLowestBid extends JSONDownloaderHandler {
+
+		static final String[] cols = new String[] {
+			"prop_id",
+			"prop_bod",
+			"prop_time",
+			"prop_duration",
+			"prop_duration_time"
+		};
+
+		public GetLowestBid() {
+			super("http://www.speedFix.eu/android/get_all_proposals.php", "proposals", cols);
+		}
+
+		@Override
+		public void data(List<Map<String, String>> data) {
+			if(data.size() == 0) {
+				return;
+			}
+		}
+
+	}
 	
+	public static class NewBid extends JSONUploaderHandler {
+
+		public NewBid(Map<String, String> rowData) {
+			super("http://www.speedFix.eu/android/create_proposal.php", rowData);
+		}
+		
+		public NewBid(String phoneID, double price) {
+			this(createMap(phoneID, price));
+		}
+		
+		public static Map<String, String> createMap(String phoneID, double price) {
+			Map<String, String> map = new HashMap<String, String>();
+			DecimalFormat format = new DecimalFormat("########.##");
+			map.put("prop_bod", format.format(price));
+			map.put("prop_duration", -1+"");
+			map.put("prop_duration_time", "UNDEFINED");
+			return map;
+		}
+		
+	}
+
 }

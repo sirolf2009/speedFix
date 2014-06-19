@@ -229,7 +229,6 @@ public class ActivityMap extends ActivityBaseMap {
 			saved = new HashSet<String>();
 		}
 		for(String string : engineers) {
-			Log.i("checking: "+string);
 			if(!saved.contains(string)) {
 				/*Map<String, String> engineerData = Helper.decipherEngineer(string);
 				LatLng bussinesLoc = getLocation(engineerData.get("street")+" "+engineerData.get("name")+" "+COUNTRY, geocoder);
