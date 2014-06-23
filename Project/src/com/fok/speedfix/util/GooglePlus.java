@@ -183,7 +183,7 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 
 		private static Map<String, String> createMapFromPlus(Person plus) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("user_id", plus.getId());
+			map.put("user_id_google", plus.getId());
 			map.put("user_username", plus.getDisplayName());
 			map.put("user_name", plus.getName().getGivenName());
 			map.put("user_surname", plus.getName().getFamilyName());

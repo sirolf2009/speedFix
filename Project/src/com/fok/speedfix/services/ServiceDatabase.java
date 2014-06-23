@@ -37,16 +37,9 @@ public class ServiceDatabase extends Service {
 		}).start();
 		return START_STICKY;
 	}
-
-	public void retrieveAvailabeEngineersFromDatabase() {
-		//Collect
-		//ActivityMap.notifyIfNewEngineer(getApplicationContext(), null);
-	}
-
+	
 	public void sendPhone(Map<String, String> info) {
-		// TODO fill database
 		new AddBrokenPhone(info).execute();
-		Log.i(info);
 	}
 
 	@Override

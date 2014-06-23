@@ -1,6 +1,7 @@
 package com.fok.speedfix.util;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Helper {
@@ -136,6 +137,112 @@ public class Helper {
 	
 	public static String encipherPhone(String key, String board, String brand, String device, String display, String hardware, String software, String manufacturer, String model, String product, String component, String description) {
 		return key+"&"+board+"&"+brand+"&"+device+"&"+display+"&"+hardware+"&"+software+"&"+manufacturer+"&"+model+"&"+product+"&"+component+"&"+description;
+	}
+	
+	public static class GetAllUsers extends JSONDownloaderHandler {
+
+		static final String[] cols = new String[] {
+			"user_id",
+			"user_id_google",
+			"user_username",
+			"user_name",
+			"user_surname",
+			"user_email",
+			"user_gender",
+			"user_language"
+		};
+
+		private IJsonResponse response;
+		public static final String tag = "users";
+
+		public GetAllUsers(IJsonResponse getUserType) {
+			super("http://www.speedFix.eu/android/get_all_users.php", tag, cols);
+		}
+
+		@Override
+		public void data(List<Map<String, String>> data) {
+			response.getResponse(data, tag);
+		}
+	}
+	
+	public static class GetAllProposals extends JSONDownloaderHandler {
+
+		public static final String[] cols = {
+			"prop_id",
+			"zak_id",
+			"device_id",
+			"prop_bod"
+		};
+
+		private IJsonResponse response;
+		public static final String tag = "proposals";
+
+		public GetAllProposals(IJsonResponse getUserType) {
+			super("http://www.speedFix.eu/android/get_all_proposals.php", tag, cols);
+		}
+
+		@Override
+		public void data(List<Map<String, String>> data) {
+			response.getResponse(data, tag);
+		}
+	}
+	
+	public static class GetAllBusinesses extends JSONDownloaderHandler {
+
+		public static final String[] cols = new String[] {
+			"zak_id",
+			"zak_bedrijfsnaam",
+			"zak_kvk",
+			"zak_email",
+			"zak_naam",
+			"zak_achternaam",
+			"zak_geslacht",
+			"zak_postcode",
+			"zak_huisnummer",
+			"zak_toevoeging",
+			"zak_straat",
+			"zak_plaats",
+			"zak_provincie",
+			"zak_land",
+			"zak_telefoon",
+			"zak_mobiel"
+		};
+
+		private IJsonResponse response;
+		public static final String tag = "zakelijk";
+
+		public GetAllBusinesses(IJsonResponse getUserType) {
+			super("http://www.speedFix.eu/android/get_all_proposals.php", tag, cols);
+		}
+
+		@Override
+		public void data(List<Map<String, String>> data) {
+			response.getResponse(data, tag);
+		}
+	}
+	
+	public static class ProposalUpdate extends JSONUploaderHandler {
+
+		public ProposalUpdate(Map<String, String> rowData) {
+			super("http://www.speedFix.eu/android/update_proposal.php", rowData);
+		}
+		
+	}
+	
+	public static class EngineerUpdate extends JSONUploaderHandler {
+
+		public EngineerUpdate(Map<String, String> rowData) {
+			super("http://www.speedFix.eu/android/update_zak.php", rowData);
+		}
+		
+	}
+	
+	public static class UserUpdate extends JSONUploaderHandler {
+
+		public UserUpdate(Map<String, String> rowData) {
+			super("http://www.speedFix.eu/android/update_user.php", rowData);
+		}
+		
 	}
 
 }

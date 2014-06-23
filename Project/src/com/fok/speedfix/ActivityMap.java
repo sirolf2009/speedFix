@@ -188,8 +188,6 @@ public class ActivityMap extends ActivityBaseMap {
 		while(addresses==null){
 			try {
 				addresses = geo.getFromLocationName(s, 1);
-				Log.i(addresses);
-				Log.i(s);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -230,15 +228,7 @@ public class ActivityMap extends ActivityBaseMap {
 		}
 		for(String string : engineers) {
 			if(!saved.contains(string)) {
-				/*Map<String, String> engineerData = Helper.decipherEngineer(string);
-				LatLng bussinesLoc = getLocation(engineerData.get("street")+" "+engineerData.get("name")+" "+COUNTRY, geocoder);
-				double[] loc = getlocation(context);
-				LatLng myLoc = new LatLng(loc[0], loc[1]);
-				Log.i("within distance? "+getLatLngDistance(bussinesLoc, myLoc));
-				if(getLatLngDistance(bussinesLoc, myLoc) < 5000) {
-					Log.i("within distance");
-				}*/
-				createNotification(string, context);
+				createNotification(Helper.decipherEngineer(string).get("zak_bedrijfsnaam"), context);
 				saved.add(string);
 			}
 		}

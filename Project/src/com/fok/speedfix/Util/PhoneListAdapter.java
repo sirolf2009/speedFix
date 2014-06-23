@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.fok.speedfix.R;
@@ -17,39 +16,50 @@ import com.fok.speedfix.R;
 public class PhoneListAdapter extends ArrayAdapter<String> {
 
 	private Context context;
-	private List<String> brands;
 	private List<Map<String, String>> phones;
 
 	public PhoneListAdapter(Context context, int textViewResourceId, List<String> brands, List<Map<String, String>> phones) {
 		super(context, textViewResourceId, brands);
 		this.context = context;
-		this.brands = brands;
 		this.phones = phones;
 	}
 
-	public View getView(int position, View convertView, ViewGroup parent) {
-		String brand = brands.get(position);
+	public View getView(int position, View view, ViewGroup parent) {
+		//String brand = phoneIDs.get(position);
 		
-		View view = convertView;
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = inflater.inflate(R.layout.phone_list_item, null);
 		}
-
-		TextView itemView = (TextView) view.findViewById(R.id.textView1);
+		
+		TextView itemView = (TextView) view.findViewById(R.id.phoneID);
 		if (itemView != null) {
-			itemView.setText(brand);
+			itemView.setText(phones.get(position).get("device_id"));
+		}
+
+		itemView = (TextView) view.findViewById(R.id.textView1);
+		if (itemView != null) {
+			itemView.setText(phones.get(position).get("device_brand"));
 		}
 		
 		itemView = (TextView) view.findViewById(R.id.textView2);
 		if (itemView != null) {
 			itemView.setText(phones.get(position).get("device_component"));
 		}
+		
+		itemView = (TextView) view.findViewById(R.id.textView3);
+		if (itemView != null) {
+			if(phones.get(position).containsKey("lowestBid")) {
+				itemView.setText("Lowest Bid: "+phones.get(position).get("lowestBid"));
+			} else {
+				itemView.setText("Retrieving bids, please wait");
+			}
+		}
 
 		ImageView image = (ImageView) view.findViewById(R.id.imageView1);
-		if(brand.equalsIgnoreCase("samsung")) {
+		if(phones.get(position).get("device_brand").equalsIgnoreCase("samsung")) {
 			image.setImageResource(R.drawable.samsung_logo);
-		} else if(brand.equalsIgnoreCase("vodafone")) {
+		} else if(phones.get(position).get("device_brand").equalsIgnoreCase("vodafone")) {
 			image.setImageResource(R.drawable.vodafone_logo);
 		}
 		

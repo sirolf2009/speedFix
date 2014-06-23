@@ -7,9 +7,14 @@ public class Log {
 
 	public Log() {
 	}
-	
+
 	public static void i(String msg) {
 		android.util.Log.i("speedFix", msg);
+	}
+	
+
+	public static void i(Object msg) {
+		android.util.Log.i("speedFix", msg+"");
 	}
 	
 	public static void i(Map<?, ?> map) {
@@ -49,6 +54,10 @@ public class Log {
 
 	public static void e(String msg) {
 		android.util.Log.e("speedFix", msg);
+	}
+	
+	public static void wtf(String msg) {
+		android.util.Log.wtf("speedFix", msg);
 	}
 
 }
