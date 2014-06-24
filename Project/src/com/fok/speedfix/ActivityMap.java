@@ -24,6 +24,7 @@ import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fok.speedfix.util.EngieListAdapter;
 import com.fok.speedfix.util.GooglePlus;
@@ -211,21 +212,25 @@ public class ActivityMap extends ActivityBaseMap {
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	public static void createNotification(String companyName, Context context) {
-		NotificationCompat.Builder mBuilder =
-				new NotificationCompat.Builder(context)
-		.setSmallIcon(R.drawable.logo)
-		.setContentTitle(companyName)
-		.setContentText("wants to fix your device!")
-		.setAutoCancel(true);
+		if(android.os.Build.VERSION.SDK_INT < 16) {
+			Toast.makeText(MainActivity.instance, companyName, Toast.LENGTH_LONG).show();
+		} else {
+			NotificationCompat.Builder mBuilder =
+					new NotificationCompat.Builder(context)
+			.setSmallIcon(R.drawable.logo)
+			.setContentTitle(companyName)
+			.setContentText("wants to fix your device!")
+			.setAutoCancel(true);
 
-		Intent resultIntent = new Intent(context, ActivityMap.class);
-		TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-		stackBuilder.addParentStack(ActivityMap.class);
-		stackBuilder.addNextIntent(resultIntent);
-		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-		mBuilder.setContentIntent(resultPendingIntent);
-		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(MainActivity.NOTIFICATION_SERVICE);
-		mNotificationManager.notify(0, mBuilder.build());
+			Intent resultIntent = new Intent(context, ActivityMap.class);
+			TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+			stackBuilder.addParentStack(ActivityMap.class);
+			stackBuilder.addNextIntent(resultIntent);
+			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+			mBuilder.setContentIntent(resultPendingIntent);
+			NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(MainActivity.NOTIFICATION_SERVICE);
+			mNotificationManager.notify(0, mBuilder.build());
+		}
 	}
 
 	public static void notifyIfNewEngineer(Context context, Iterable<String> engineers) {

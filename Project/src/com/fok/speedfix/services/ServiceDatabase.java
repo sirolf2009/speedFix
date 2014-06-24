@@ -7,6 +7,7 @@ import java.util.Map;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.Looper;
 
 import com.fok.speedfix.ActivityMap;
 import com.fok.speedfix.ActivityPhoneList;
@@ -26,18 +27,22 @@ public class ServiceDatabase extends Service {
 		new Thread(new Runnable() {
 			@Override
 			public synchronized void run() {
-				while(true) {
-					new PhoneListUpdate().execute();
-					new EngineerListUpdate().execute();
-					try {
-						Thread.sleep(1000*60*10); //10 mins
-					} catch (InterruptedException e) {} //ne'er gonna happen
+				if(android.os.Build.VERSION.SDK_INT >= 16) {
+					while(true) {
+						Looper.prepare();
+						new PhoneListUpdate().execute();
+						new EngineerListUpdate().execute();
+						try {
+							Thread.sleep(1000); //10 mins
+						} catch (InterruptedException e) {} //ne'er gonna happen
+						Looper.loop();
+					}
 				}
 			}
 		}).start();
 		return START_STICKY;
 	}
-	
+
 	public void sendPhone(Map<String, String> info) {
 		new AddBrokenPhone(info).execute();
 	}
@@ -119,13 +124,13 @@ public class ServiceDatabase extends Service {
 			ActivityMap.notifyIfNewEngineer(instance, engineers);
 		}
 	}
-	
+
 	public static class AddBrokenPhone extends JSONUploaderHandler {
 
 		public AddBrokenPhone(Map<String, String> rowData) {
 			super("http://speedFix.eu/android/create_device.php", rowData);
 		}
-		
+
 	}
 
 }

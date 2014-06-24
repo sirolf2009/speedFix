@@ -37,7 +37,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void run() {
 				instance.setContentView(R.layout.main);
-				switchUser(true);
 				new MainActivity.GetCompanyInfo(MainActivity.instance).execute();
 				new GetUserType(MainActivity.instance).execute();
 			}
@@ -50,15 +49,20 @@ public class MainActivity extends Activity {
 	}
 
 	public void switchUser(boolean isNormalUser) {
-		Log.i("switching user to "+isNormalUser);
+		Log.i("switching user to "+isNormalUser); 
 		this.isNormalUser = isNormalUser;
 		TableLayout user = (TableLayout) findViewById(R.id.optionsUser);
 		TableLayout engie = (TableLayout) findViewById(R.id.optionsEngie);
-		user.setVisibility(isNormalUser ? View.VISIBLE : View.VISIBLE);
-		engie.setVisibility(isNormalUser ? View.VISIBLE : View.VISIBLE);
+		user.setVisibility(isNormalUser ? View.VISIBLE : View.GONE);
+		engie.setVisibility(isNormalUser ? View.GONE : View.VISIBLE);
 		findViewById(R.id.relativeLayout1).invalidate();
 	}
 
+	public void signOut(View v) {
+		plus.signOutFromGplus();
+		plus.signInWithGplus(instance);
+	}
+	
 	public void repairPhone(View view) {
 		startActivity(new Intent(this, ActivityRepairPhone.class));
 	}
@@ -99,7 +103,7 @@ public class MainActivity extends Activity {
 		@Override
 		public void data(List<Map<String, String>> data) {
 			businesses = data;
-			checkForCompany();
+			checkForCompany(); 
 		}
 
 		@TargetApi(Build.VERSION_CODES.GINGERBREAD)
@@ -109,13 +113,13 @@ public class MainActivity extends Activity {
 			}
 			for(Map<String, String> bizz : businesses) {
 				for(Map<String, String> user : users) {
-					if(!user.get("zak_id").isEmpty() && user.get("zak_id") == bizz.get("zak_id") && user.get("user_id_google").equals(MainActivity.plus.getUser().getId())) {
+					Log.i(user.get("zak_id")+" == "+bizz.get("zak_id"));
+					if(!user.get("zak_id").isEmpty() && user.get("zak_id").equals(bizz.get("zak_id")) && user.get("user_id_google").equals(MainActivity.plus.getUser().getId())) {
 						activity.switchUser(false);
 						Log.i("setting user info");
 						activity.userInfo = user;
 						return;
 					} else if(user.get("user_id_google").equals(MainActivity.plus.getUser().getId())) {
-						Log.i("setting user info");
 						activity.userInfo = user;
 					}
 				}

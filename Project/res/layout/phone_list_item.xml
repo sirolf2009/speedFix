@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:onClick="test"
     android:paddingBottom="2dp" >
 
@@ -52,7 +54,9 @@
         android:layout_toLeftOf="@+id/button1"
         android:layout_toRightOf="@+id/textView3"
         android:ems="10"
-        android:inputType="numberDecimal" >
+        android:inputType="numberDecimal"
+        android:nextFocusDown="@id/editText1"
+        android:nextFocusUp="@id/editText1" >
 
         <requestFocus />
     </EditText>
@@ -121,7 +125,7 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow3"
+            android:id="@+id/TableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
@@ -172,7 +176,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
-
         </TableRow>
 
         <TableRow
@@ -191,7 +194,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
-
         </TableRow>
 
         <TableRow
@@ -210,7 +212,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
-
         </TableRow>
 
         <TableRow
@@ -229,7 +230,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
-
         </TableRow>
 
         <TableRow
@@ -248,7 +248,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
-
         </TableRow>
 
         <TableRow
@@ -267,9 +266,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
-
         </TableRow>
-
     </TableLayout>
 
     <TextView

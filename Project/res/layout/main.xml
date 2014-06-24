@@ -5,34 +5,31 @@
     android:background="@color/clrDarkGray"
     tools:context="${packageName}.${activityClass}" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/clrDarkRed" >
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="32dp"
-            android:onClick="repairPhone"
-            android:text="Reparatie Melden"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
     <TableLayout
         android:id="@+id/optionsUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout1"
         android:stretchColumns="1" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/clrDarkRed" >
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="32dp"
+                android:onClick="repairPhone"
+                android:text="Reparatie Melden"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
         <TableRow
             android:id="@+id/tableRow2"
@@ -71,7 +68,7 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow3"
+            android:id="@+id/TableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
@@ -141,8 +138,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/clrWhite" />
             </LinearLayout>
-        </TableRow>
 
+        </TableRow>
     </TableLayout>
 
     <TableLayout
@@ -164,6 +161,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="16dp"
                 android:onClick="onPhoneInfoClicked" />
 
@@ -201,7 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="16dp"
                 android:onClick="onPhoneListClicked" />
 
             <LinearLayout
@@ -227,24 +225,6 @@
                     android:textColor="@color/clrWhite" />
             </LinearLayout>
 
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
         </TableRow>
     </TableLayout>
 
