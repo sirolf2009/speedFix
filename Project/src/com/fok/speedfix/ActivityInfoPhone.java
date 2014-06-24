@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.os.Build;
 
-public class ActivityPhoneInfo extends Activity {
+public class ActivityInfoPhone extends Activity {
 
 	TextView Board;
 	TextView Bootloader;
@@ -26,7 +26,7 @@ public class ActivityPhoneInfo extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_phone_info);
+		setContentView(R.layout.info_phone);
 		
 		GooglePlus.updateTitleBar(this);
 		

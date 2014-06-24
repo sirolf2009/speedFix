@@ -69,6 +69,7 @@ public abstract class JSONUploaderHandler extends AsyncTask<String, String, Stri
     }
     
     public void onFailure(String error) {
+    	Log.e(error);
     }
 
 }

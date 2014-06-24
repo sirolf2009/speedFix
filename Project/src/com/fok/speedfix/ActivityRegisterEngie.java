@@ -5,8 +5,10 @@ import java.util.Map;
 
 import com.fok.speedfix.util.Helper;
 import com.fok.speedfix.util.IJsonResponse;
+import com.fok.speedfix.util.Log;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -30,13 +32,26 @@ public class ActivityRegisterEngie extends Activity implements IJsonResponse {
 	@Override
 	public void getResponse(List<Map<String, String>> data, String tag) {
 		for(Map<String, String> bizz : data) {
-			if(code.equals(bizz.get("zak_code"))) {
-				//TODO
-				//activate
+			if(code.equals(bizz.get("zak_activate"))) {
+				Log.i("company found");
+				Map<String, String> userInfo = MainActivity.instance.userInfo;
+				userInfo.put("zak_id", bizz.get("zak_id"));
+				((EditText) findViewById(R.id.editText1)).setText("");
+				new Helper.UserUpdate(userInfo).execute();
+				
+				bizz.put("zak_activate", "");
+				new Helper.EngineerUpdate(bizz).execute();
+
+				((EditText) findViewById(R.id.editText1)).setText("");
+				
+				MainActivity.instance.switchUser(false);
+				MainActivity.instance.userInfo = userInfo;
+				MainActivity.instance.companyInfo = bizz;
+				startActivity(new Intent(this, MainActivity.class));
 				return;
 			}
 		}
-		((EditText) findViewById(R.id.editText1)).setText("");
+		Log.i("no company found");
 	}
 
 }

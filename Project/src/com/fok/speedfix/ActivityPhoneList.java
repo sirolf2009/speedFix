@@ -33,6 +33,7 @@ import com.fok.speedfix.util.Helper;
 import com.fok.speedfix.util.IJsonResponse;
 import com.fok.speedfix.util.JSONDownloaderHandler;
 import com.fok.speedfix.util.JSONUploaderHandler;
+import com.fok.speedfix.util.Log;
 import com.fok.speedfix.util.PhoneListAdapter;
 import com.fok.speedfix.util.Storage;
 
@@ -59,7 +60,7 @@ public class ActivityPhoneList extends Activity {
 		for(Map<String, String> phone : phones) {
 			brands.add(phone.get("device_id"));
 		}
-		((ListView)findViewById(R.id.listViewPhones)).setAdapter(new PhoneListAdapter(this, R.id.textView1, brands, phones));
+		((ListView)findViewById(R.id.listViewPhones)).setAdapter(new PhoneListAdapter(this, R.id.companyDetailNameDescriptor, brands, phones));
 
 		new GetCompanyInfo().execute();
 		new UpdateLowestBids(this).execute();
@@ -76,7 +77,7 @@ public class ActivityPhoneList extends Activity {
 		EditText bid = (EditText) layout.findViewById(R.id.editText1);
 		TextView ID = (TextView) layout.findViewById(R.id.phoneID);
 		try {
-			new NewBid(ID.getText().toString(), Double.parseDouble(bid.getText().toString())).execute();
+			new SendBid(ID.getText().toString(), Double.parseDouble(bid.getText().toString()), this);
 		} catch(NumberFormatException e) {
 			AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
 			helpBuilder.setTitle("Error processing bid");
@@ -126,6 +127,51 @@ public class ActivityPhoneList extends Activity {
 			}
 		}
 	}
+	
+	public static class SendBid implements IJsonResponse {
+
+		private String phoneID;
+		private double price;
+		private Context context;
+		
+		
+		public SendBid(String phoneID, double price, Context context) {
+			this.phoneID = phoneID;
+			this.price = price;
+			this.context = context;
+			new Helper.GetAllProposals(this).execute();
+		}
+		
+		@Override
+		public void getResponse(List<Map<String, String>> data, String tag) {
+			Log.i("searching for zak id "+ActivityPhoneList.company.get("zak_id"));
+			Log.i(data);
+			for(Map<String, String> row : data) {
+				Log.i("found zak id "+row.get("zak_id"));
+				if(row.get("device_id").equals(phoneID) && row.get("zak_id").equals(ActivityPhoneList.company.get("zak_id"))) {
+					if(price >= Double.parseDouble(row.get("prop_bod"))) {
+						AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
+						helpBuilder.setTitle("Error processing bid");
+						helpBuilder.setMessage("This bid is higher than your previous bid. Please bid below €"+row.get("prop_bod"));
+						helpBuilder.setPositiveButton("Ok",	new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+							}
+						});
+						AlertDialog helpDialog = helpBuilder.create();
+						helpDialog.show();
+						return;
+					} else {
+						Log.i("updating bid");
+						new UpdateBid(phoneID, price, row.get("prop_id")).execute();
+						return;
+					}
+				}
+			}
+			Log.i("creating a new bid");
+			new NewBid(phoneID, price).execute();
+		}
+		
+	}
 
 	public static class NewBid extends JSONUploaderHandler {
 
@@ -141,6 +187,7 @@ public class ActivityPhoneList extends Activity {
 			Map<String, String> map = new HashMap<String, String>();
 			DecimalFormat format = new DecimalFormat("########.##");
 			map.put("prop_bod", format.format(price));
+			map.put("device_id", phoneID);
 			map.put("zak_id", ActivityPhoneList.company.get("zak_id"));
 			map.put("prop_time", SimpleDateFormat.getDateInstance().format(Calendar.getInstance().getTime()));
 			map.put("prop_duration", -1+"");
@@ -152,14 +199,16 @@ public class ActivityPhoneList extends Activity {
 
 	public static class UpdateBid extends JSONUploaderHandler {
 
-		public UpdateBid(String phoneID, double price) {
-			super("http://www.speedFix.eu/android/update_proposal.php", getData(phoneID, price));
+		public UpdateBid(String phoneID, double price, String propID) {
+			super("http://www.speedFix.eu/android/update_proposal.php", getData(phoneID, price, propID));
 		}
 
-		public static Map<String, String> getData(String phoneId, double price) {
+		public static Map<String, String> getData(String phoneID, double price, String propID) {
 			Map<String, String> map = new HashMap<String, String>();
 			DecimalFormat format = new DecimalFormat("########.##");
+			map.put("prop_id", propID);
 			map.put("prop_bod", format.format(price));
+			map.put("device_id", phoneID);
 			map.put("zak_id", ActivityPhoneList.company.get("zak_id"));
 			map.put("prop_time", SimpleDateFormat.getDateInstance().format(Calendar.getInstance().getTime()));
 			map.put("prop_duration", -1+"");
@@ -176,7 +225,7 @@ public class ActivityPhoneList extends Activity {
 
 		public GetCompanyInfo() {
 			super("http://www.speedFix.eu/android/get_all_bizz.php", "zakelijk", Helper.GetAllBusinesses.cols);
-			new Helper.GetAllUsers(this);
+			new Helper.GetAllUsers(this).execute();
 		}
 
 		@Override
@@ -185,20 +234,23 @@ public class ActivityPhoneList extends Activity {
 			checkForCompany();
 		}
 
-		public void postUsers(List<Map<String, String>> data) {
-		}
-
+		@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 		public void checkForCompany() {
 			if(businesses == null || users == null) {
 				return;
 			}
 			for(Map<String, String> bizz : businesses) {
 				for(Map<String, String> user : users) {
-					if(user.get("zak_id") == bizz.get("zak_id") && user.get("user_username").equals(MainActivity.plus.getUser().getDisplayName())) {
+					if(user.get("zak_id").isEmpty()) {
+						continue;
+					}
+					if(user.get("zak_id").equals(bizz.get("zak_id")) && user.get("user_username").equals(MainActivity.plus.getUser().getDisplayName())) {
 						ActivityPhoneList.company = bizz;
+						return;
 					}
 				}
 			}
+			Log.e("no company info found");
 		}
 
 		@Override

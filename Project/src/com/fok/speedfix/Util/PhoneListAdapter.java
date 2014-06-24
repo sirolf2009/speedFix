@@ -37,12 +37,12 @@ public class PhoneListAdapter extends ArrayAdapter<String> {
 			itemView.setText(phones.get(position).get("device_id"));
 		}
 
-		itemView = (TextView) view.findViewById(R.id.textView1);
+		itemView = (TextView) view.findViewById(R.id.companyDetailNameDescriptor);
 		if (itemView != null) {
 			itemView.setText(phones.get(position).get("device_brand"));
 		}
 		
-		itemView = (TextView) view.findViewById(R.id.textView2);
+		itemView = (TextView) view.findViewById(R.id.companyName);
 		if (itemView != null) {
 			itemView.setText(phones.get(position).get("device_component"));
 		}
@@ -56,7 +56,7 @@ public class PhoneListAdapter extends ArrayAdapter<String> {
 			}
 		}
 
-		ImageView image = (ImageView) view.findViewById(R.id.imageView1);
+		ImageView image = (ImageView) view.findViewById(R.id.imageAvatar);
 		if(phones.get(position).get("device_brand").equalsIgnoreCase("samsung")) {
 			image.setImageResource(R.drawable.samsung_logo);
 		} else if(phones.get(position).get("device_brand").equalsIgnoreCase("vodafone")) {

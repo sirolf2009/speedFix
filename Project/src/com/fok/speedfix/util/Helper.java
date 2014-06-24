@@ -149,14 +149,16 @@ public class Helper {
 			"user_surname",
 			"user_email",
 			"user_gender",
-			"user_language"
+			"user_language",
+			"zak_id"
 		};
 
 		private IJsonResponse response;
 		public static final String tag = "users";
 
-		public GetAllUsers(IJsonResponse getUserType) {
+		public GetAllUsers(IJsonResponse iJsonResponse) {
 			super("http://www.speedFix.eu/android/get_all_users.php", tag, cols);
+			this.response = iJsonResponse;
 		}
 
 		@Override
@@ -179,6 +181,7 @@ public class Helper {
 
 		public GetAllProposals(IJsonResponse getUserType) {
 			super("http://www.speedFix.eu/android/get_all_proposals.php", tag, cols);
+			this.response = getUserType;
 		}
 
 		@Override
@@ -205,14 +208,16 @@ public class Helper {
 			"zak_provincie",
 			"zak_land",
 			"zak_telefoon",
-			"zak_mobiel"
+			"zak_mobiel",
+			"zak_activate"
 		};
 
 		private IJsonResponse response;
 		public static final String tag = "zakelijk";
 
-		public GetAllBusinesses(IJsonResponse getUserType) {
-			super("http://www.speedFix.eu/android/get_all_proposals.php", tag, cols);
+		public GetAllBusinesses(IJsonResponse iJsonResponse) {
+			super("http://www.speedFix.eu/android/get_all_bizz.php", tag, cols);
+			this.response = iJsonResponse;
 		}
 
 		@Override
@@ -232,7 +237,7 @@ public class Helper {
 	public static class EngineerUpdate extends JSONUploaderHandler {
 
 		public EngineerUpdate(Map<String, String> rowData) {
-			super("http://www.speedFix.eu/android/update_zak.php", rowData);
+			super("http://www.speedFix.eu/android/update_bizz.php", rowData);
 		}
 		
 	}
@@ -240,7 +245,7 @@ public class Helper {
 	public static class UserUpdate extends JSONUploaderHandler {
 
 		public UserUpdate(Map<String, String> rowData) {
-			super("http://www.speedFix.eu/android/update_user.php", rowData);
+			super("http://www.speedFix.eu/android/update_users.php", rowData);
 		}
 		
 	}

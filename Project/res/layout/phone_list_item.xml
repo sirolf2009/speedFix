@@ -14,7 +14,7 @@
         android:minWidth="64dp" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/imageAvatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -29,7 +29,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/companyDetailNameDescriptor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -37,10 +37,10 @@
         android:text="Samsung" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/companyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/companyDetailNameDescriptor"
         android:layout_toRightOf="@+id/relativeLayout1"
         android:text="Broken Screen" />
 
@@ -48,7 +48,7 @@
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/companyDetailNameDescriptor"
         android:layout_toLeftOf="@+id/button1"
         android:layout_toRightOf="@+id/textView3"
         android:ems="10"
@@ -71,8 +71,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/companyName"
+        android:layout_below="@+id/companyName"
         android:text="Lowest Bid: $50" />
 
     <TableLayout

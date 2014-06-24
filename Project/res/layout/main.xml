@@ -31,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout1" >
+        android:layout_below="@+id/relativeLayout1"
+        android:stretchColumns="1" >
 
         <TableRow
             android:id="@+id/tableRow2"
@@ -150,7 +151,44 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/optionsUser" >
+        android:layout_below="@+id/optionsUser"
+        android:stretchColumns="1" >
+
+        <TableRow
+            android:id="@+id/TableRow01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/Button05"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="onPhoneInfoClicked" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/TextView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mijn Gegevens"
+                    android:textColor="@color/clrWhite"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Een overzicht van uw gegevens"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/clrWhite" />
+            </LinearLayout>
+        </TableRow>
 
         <TableRow
             android:id="@+id/tableRow5"
@@ -172,7 +210,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/TextView02"
+                    android:id="@+id/companyStreet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Phone List"
@@ -180,7 +218,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/TextView01"
+                    android:id="@+id/companyStreetDescriptor"
                     android:layout_width="252dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

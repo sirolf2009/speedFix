@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fok.speedfix.MainActivity;
+import com.fok.speedfix.MainActivity.GetUserType;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -44,13 +45,13 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 
 	public void signInWithGplus(Activity activity) {
 		this.activity = activity;
-		mGoogleApiClient = new GoogleApiClient.Builder(activity)
+		setmGoogleApiClient(new GoogleApiClient.Builder(activity)
 		.addConnectionCallbacks(this)
 		.addOnConnectionFailedListener(this).addApi(Plus.API, PlusOptions.builder().build())
-		.addScope(Plus.SCOPE_PLUS_LOGIN).build();
-		if (!mGoogleApiClient.isConnecting()) {
+		.addScope(Plus.SCOPE_PLUS_LOGIN).build());
+		if (!getmGoogleApiClient().isConnecting()) {
 			mSignInClicked = true;
-			mGoogleApiClient.connect();
+			getmGoogleApiClient().connect();
 		}
 	}
 
@@ -64,7 +65,7 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 				mConnectionResult.startResolutionForResult(activity, RC_SIGN_IN);
 			} catch (SendIntentException e) {
 				mIntentInProgress = false;
-				mGoogleApiClient.connect();
+				getmGoogleApiClient().connect();
 			}
 		}
 	}
@@ -75,13 +76,14 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 	 * */
 	public void getProfileInformation() {
 		try {
-			if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+			if (Plus.PeopleApi.getCurrentPerson(getmGoogleApiClient()) != null) {
 				Person currentPerson = Plus.PeopleApi
-						.getCurrentPerson(mGoogleApiClient);
+						.getCurrentPerson(getmGoogleApiClient());
 				String personName = currentPerson.getDisplayName();
 				String personPhotoUrl = currentPerson.getImage().getUrl();
 				String personGooglePlusProfile = currentPerson.getUrl();
-				String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+				String email = Plus.AccountApi.getAccountName(getmGoogleApiClient());
+				
 
 				Log.e("Name: " + personName + ", plusProfile: "
 						+ personGooglePlusProfile + ", email: " + email
@@ -128,10 +130,10 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 	 * Sign-out from google
 	 * */
 	public void signOutFromGplus() {
-		if (mGoogleApiClient.isConnected()) {
-			Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-			mGoogleApiClient.disconnect();
-			mGoogleApiClient.connect();
+		if (getmGoogleApiClient().isConnected()) {
+			Plus.AccountApi.clearDefaultAccount(getmGoogleApiClient());
+			getmGoogleApiClient().disconnect();
+			getmGoogleApiClient().connect();
 		}
 	}
 
@@ -143,12 +145,12 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 	}
 	
 	public Person getUser() {
-		return Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+		return Plus.PeopleApi.getCurrentPerson(getmGoogleApiClient());
 	}
 
 	@Override
 	public void onConnectionSuspended(int cause) {
-		mGoogleApiClient.connect();
+		getmGoogleApiClient().connect();
 	}
 
 	@Override
@@ -166,11 +168,19 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 	}
 	
 	public static void updateTitleBar(Activity activity) {
-		if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+		if (Plus.PeopleApi.getCurrentPerson(getmGoogleApiClient()) != null) {
 			activity.setTitle(activity.getTitle()+" - "+MainActivity.plus.getUser().getDisplayName());
 		}
 	}
 	
+	public static GoogleApiClient getmGoogleApiClient() {
+		return mGoogleApiClient;
+	}
+
+	public static void setmGoogleApiClient(GoogleApiClient mGoogleApiClient) {
+		GooglePlus.mGoogleApiClient = mGoogleApiClient;
+	}
+
 	public static class CreateGoogleUser extends JSONUploaderHandler {
 
 		public CreateGoogleUser(Map<String, String> rowData) {
@@ -187,7 +197,7 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 			map.put("user_username", plus.getDisplayName());
 			map.put("user_name", plus.getName().getGivenName());
 			map.put("user_surname", plus.getName().getFamilyName());
-			map.put("user_email", Plus.AccountApi.getAccountName(mGoogleApiClient));
+			map.put("user_email", Plus.AccountApi.getAccountName(getmGoogleApiClient()));
 			map.put("user_gender", plus.getGender()+"");
 			map.put("user_language", plus.getLanguage());
 			return map;
