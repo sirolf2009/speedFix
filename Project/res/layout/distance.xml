@@ -9,18 +9,30 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="240dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />
 
-    <ListView
-        android:id="@+id/listViewMap"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/map"
-        android:scrollbarSize="20dp"
-        android:fadeScrollbars="false" >
-    </ListView>
+        android:orientation="vertical" >
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="wrap_content"
+            android:layout_height="4dp"
+            android:background="@color/clrMarineBlue" />
+
+        <ListView
+            android:id="@+id/listViewMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="20dp" >
+        </ListView>
+
+    </LinearLayout>
 
 </RelativeLayout>

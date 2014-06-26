@@ -45,12 +45,17 @@ public class EngieListAdapter extends ArrayAdapter<String> {
 
 		itemView = (TextView) view.findViewById(R.id.companyDetailStreet);
 		if (itemView != null) {
-			itemView.setText(engineer.get("zak_straat")+" "+engineer.get("zak_huisnummer")+engineer.get("zak_toevoeging"));
+			itemView.setText(engineer.get("zak_straat")+" "+engineer.get("zak_huisnummer")+engineer.get("zak_toevoeging")+", "+engineer.get("zak_postcode"));
 		}
 
 		itemView = (TextView) view.findViewById(R.id.pos);
 		if (itemView != null) {
 			itemView.setText(position+"");
+		}
+		
+		itemView = (TextView) view.findViewById(R.id.posIndicator);
+		if (itemView != null) {
+			itemView.setText(""+(position+1));
 		}
 		
 		final TextView priceView = (TextView) view.findViewById(R.id.companyDetailPrice);

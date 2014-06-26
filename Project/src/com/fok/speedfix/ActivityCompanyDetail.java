@@ -30,10 +30,14 @@ public class ActivityCompanyDetail extends Activity {
 		if (itemView != null) {
 			itemView.setText(engineer.get("zak_postcode")+" "+engineer.get("zak_plaats"));
 		}
-		
+
 		itemView = (TextView) findViewById(R.id.companyDetailTelephone);
 		if (itemView != null) {
 			itemView.setText(engineer.get("zak_telefoon"));
+		}
+		itemView = (TextView) findViewById(R.id.companyDetailMobile);
+		if (itemView != null) {
+			itemView.setText(engineer.get("zak_mobiel"));
 		}
 		itemView = (TextView) findViewById(R.id.companyDetailEmail);
 		if (itemView != null) {

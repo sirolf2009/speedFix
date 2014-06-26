@@ -28,7 +28,7 @@ public class Helper {
 		int twelfthDelim = engineerData.indexOf("&", eleventhDelim+1);
 		int thirteenthDelim = engineerData.indexOf("&", twelfthDelim+1);
 		int fourteenthDelim = engineerData.indexOf("&", thirteenthDelim+1);
-		//int fifteenthDelim = engineerData.indexOf("&", fourteenthDelim+1);
+		int fifteenthDelim = engineerData.indexOf("&", fourteenthDelim+1);
 		String key = engineerData.substring(0, firstDelim);
 		String companyName = engineerData.substring(firstDelim+1, secondDelim);
 		String kvk = engineerData.substring(secondDelim+1, thirdDelim);
@@ -40,10 +40,11 @@ public class Helper {
 		String streetNumber = engineerData.substring(eigthDelim+1, ninthDelim);
 		String streetAddition = engineerData.substring(ninthDelim+1, tenthDelim);
 		String street = engineerData.substring(tenthDelim+1, eleventhDelim);
-		String province = engineerData.substring(eleventhDelim+1, twelfthDelim);
-		String land = engineerData.substring(twelfthDelim+1, thirteenthDelim);
-		String telephone = engineerData.substring(thirteenthDelim+1, fourteenthDelim);
-		String mobile = engineerData.substring(fourteenthDelim+1);
+		String city = engineerData.substring(eleventhDelim+1, twelfthDelim);
+		String province = engineerData.substring(twelfthDelim+1, thirteenthDelim);
+		String land = engineerData.substring(thirteenthDelim+1, fourteenthDelim);
+		String telephone = engineerData.substring(fourteenthDelim+1, fifteenthDelim);
+		String mobile = engineerData.substring(fifteenthDelim+1);
 		engineer.put("zak_id", key);
 		engineer.put("zak_bedrijfsnaam", companyName);
 		engineer.put("zak_kvk", kvk);
@@ -60,6 +61,7 @@ public class Helper {
 		engineer.put("zak_land", land);
 		engineer.put("zak_telefoon", telephone);
 		engineer.put("zak_mobiel", mobile);
+		Log.i(engineer);
 		return engineer;
 	}
 	

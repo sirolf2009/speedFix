@@ -25,7 +25,7 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/posIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

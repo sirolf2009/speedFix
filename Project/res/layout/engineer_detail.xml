@@ -4,127 +4,177 @@
     android:layout_height="match_parent"
     android:background="@color/clrWhite" >
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/clrMarineBlue"
+        android:visibility="visible" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:onClick="repairPhone"
+            android:scaleType="fitXY"
+            android:src="@drawable/repair"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/posIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@string/app_name"
+            android:text="info"
+            android:textColor="@color/clrWhite"
+            android:textColorLink="@color/clrWhite"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+    </RelativeLayout>
+
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:orientation="vertical"
+        android:shrinkColumns="0"
         android:stretchColumns="1" >
 
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/companyDetailNameDescriptor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Naam" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp" >
 
             <TextView
                 android:id="@+id/companyDetailName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="#EB5401"
+                android:textSize="32sp" />
 
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/companyDetailStreetDescriptor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Straat" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="8dp" >
 
             <TextView
                 android:id="@+id/companyDetailStreet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/companyDetailPostalDescriptor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Postcode  " />
+                android:text="TextView"
+                android:textColor="@color/clrMarineBlue"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/companyDetailPostal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/clrMarineBlue"
+                android:textSize="18sp" />
 
         </TableRow>
 
-        <TableRow
-            android:id="@+id/TableRow3"
+        <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/companyDetailTelephoneDescriptor"
+            <TableRow
+                android:id="@+id/TableRow3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Telefoon   " />
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/companyDetailTelephone"
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/iconphone" />
+
+                <TextView
+                    android:id="@+id/companyDetailTelephone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@color/clrMarineBlue" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="wrap_content" >
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <TableRow
-            android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/companyDetailMobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@color/clrMarineBlue" />
 
-            <TextView
-                android:id="@+id/companyDetailEmailDescriptor"
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="E-Mail" />
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/companyDetailEmail"
+                <ImageView
+                    android:id="@+id/ImageView01"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/iconmail" />
+
+                <TextView
+                    android:id="@+id/companyDetailEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@color/clrMarineBlue" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="wrap_content" >
 
-        </TableRow>
+                <ImageView
+                    android:id="@+id/ImageView02"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/iconkvk" />
 
-        <TableRow
-            android:id="@+id/tableRow6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/companyDetailKVKDescriptor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="KvK" />
-
-            <TextView
-                android:id="@+id/companyDetailKVK"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-        </TableRow>
+                <TextView
+                    android:id="@+id/companyDetailKVK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@color/clrMarineBlue" />
+            </TableRow>
+        </TableLayout>
 
     </TableLayout>
 
