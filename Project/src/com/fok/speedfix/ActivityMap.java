@@ -101,9 +101,13 @@ public class ActivityMap extends ActivityBaseMap {
 			@Override
 			public void onInfoWindowClick(Marker marker) {
 				Log.i(marker.getId());
-				Intent intent = new Intent(instance, ActivityCompanyDetail.class);
-				intent.putExtra("company", Helper.encipherEngineer(markerToEngineer.get(marker.getId())));
-				startActivity(intent);
+				if(marker.getId().equals("m0")) {
+					startActivity(new Intent(instance, ActivityInfo.class));
+				} else {
+					Intent intent = new Intent(instance, ActivityCompanyDetail.class);
+					intent.putExtra("company", Helper.encipherEngineer(markerToEngineer.get(marker.getId())));
+					startActivity(intent);
+				}
 			}
 		});
 	}
@@ -153,6 +157,8 @@ public class ActivityMap extends ActivityBaseMap {
 		lv.setAdapter(adapter); 
 		//}
 		lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+		///new EngieListAdapter.GetPhoneInfo(this);
 	}
 
 	public static double getLatLngDistance(LatLng posOne, LatLng posTwo) {

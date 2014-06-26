@@ -163,12 +163,23 @@ public class ActivityPhoneList extends Activity {
 					} else {
 						Log.i("updating bid");
 						new UpdateBid(phoneID, price, row.get("prop_id")).execute();
+						AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
+						helpBuilder.setTitle("Succes");
+						helpBuilder.setMessage("Bid placed");
+						helpBuilder.setPositiveButton("Ok",	new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+							}
+						});
+						AlertDialog helpDialog = helpBuilder.create();
+						helpDialog.show();
+						new UpdateLowestBids((ActivityPhoneList) context).execute();
 						return;
 					}
 				}
 			}
 			Log.i("creating a new bid");
 			new NewBid(phoneID, price).execute();
+			new UpdateLowestBids((ActivityPhoneList) context).execute();
 		}
 		
 	}
@@ -283,6 +294,7 @@ public class ActivityPhoneList extends Activity {
 			tryUpdate();
 		}
 
+		@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 		public void tryUpdate() {
 			if(proposals == null) {
 				return;
@@ -291,7 +303,12 @@ public class ActivityPhoneList extends Activity {
 				for(Map<String, String> proposal : proposals) {
 					if(phone.get("device_id").equals(proposal.get("device_id"))) {
 						if(phone.containsKey("lowestBid")) {
-							double oldBid = Double.parseDouble(phone.get("lowestBid"));
+							double oldBid;
+							try {
+								oldBid = Double.parseDouble(phone.get("lowestBid"));
+							} catch (NumberFormatException e) {
+								continue;
+							}
 							double newBid = Double.parseDouble(proposal.get("prop_bod"));
 							if(oldBid < newBid) {
 								continue;
@@ -300,10 +317,12 @@ public class ActivityPhoneList extends Activity {
 						phone.put("lowestBid", proposal.get("prop_bod"));
 					}
 				}
+				if(phone.get("lowestBid") == null) {
+					phone.put("lowestBid", "no bids");
+				}
 			}
 			ListView list = (ListView) phoneList.findViewById(R.id.listViewPhones);
-			list.postInvalidate();
-			phoneList.findViewById(R.id.listViewPhones).postInvalidate();
+			((View)((View)list.getParent()).getParent()).postInvalidate();
 		}
 
 	}

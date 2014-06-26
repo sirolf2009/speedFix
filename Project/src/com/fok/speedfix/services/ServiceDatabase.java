@@ -11,10 +11,12 @@ import android.os.Looper;
 
 import com.fok.speedfix.ActivityMap;
 import com.fok.speedfix.ActivityPhoneList;
+import com.fok.speedfix.MainActivity;
 import com.fok.speedfix.util.Helper;
 import com.fok.speedfix.util.JSONDownloaderHandler;
 import com.fok.speedfix.util.JSONUploaderHandler;
 import com.fok.speedfix.util.Log;
+import com.fok.speedfix.util.Storage;
 
 public class ServiceDatabase extends Service {
 
@@ -30,8 +32,11 @@ public class ServiceDatabase extends Service {
 				if(android.os.Build.VERSION.SDK_INT >= 16) {
 					while(true) {
 						Looper.prepare();
-						new PhoneListUpdate().execute();
-						new EngineerListUpdate().execute();
+						if(!MainActivity.instance.isNormalUser) {
+							new PhoneListUpdate().execute();
+						} else {
+							new EngineerListUpdate().execute();
+						}
 						try {
 							Thread.sleep(1000); //10 mins
 						} catch (InterruptedException e) {} //ne'er gonna happen
@@ -45,6 +50,7 @@ public class ServiceDatabase extends Service {
 
 	public void sendPhone(Map<String, String> info) {
 		new AddBrokenPhone(info).execute();
+		Storage.savePhoneID(info.get("device_id"), this);
 	}
 
 	@Override
@@ -128,7 +134,7 @@ public class ServiceDatabase extends Service {
 	public static class AddBrokenPhone extends JSONUploaderHandler {
 
 		public AddBrokenPhone(Map<String, String> rowData) {
-			super("http://speedFix.eu/android/create_device.php", rowData);
+			super("http://speedFix.eu/android/create_devices.php", rowData);
 		}
 
 	}

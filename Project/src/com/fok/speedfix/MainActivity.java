@@ -5,10 +5,12 @@ import java.util.Map;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 
 import com.fok.speedfix.services.ServiceDatabase;
@@ -27,6 +29,8 @@ public class MainActivity extends Activity {
 	public Map<String, String> companyInfo;
 	public Map<String, String> userInfo;
 
+	public boolean isMenuVisible;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		instance = this;
@@ -37,8 +41,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void run() {
 				instance.setContentView(R.layout.main);
-				new MainActivity.GetCompanyInfo(MainActivity.instance).execute();
-				new GetUserType(MainActivity.instance).execute();
+				isMenuVisible = true;
 			}
 		}, 2000);
 
@@ -48,12 +51,23 @@ public class MainActivity extends Activity {
 		startService(new Intent(this, ServiceDatabase.class));
 	}
 
-	public void switchUser(boolean isNormalUser) {
-		Log.i("switching user to "+isNormalUser); 
+	public void switchUser(final boolean isNormalUser) {
 		this.isNormalUser = isNormalUser;
-		TableLayout user = (TableLayout) findViewById(R.id.optionsUser);
-		TableLayout engie = (TableLayout) findViewById(R.id.optionsEngie);
+		Log.i("setting user to "+isNormalUser);
+		if(!isMenuVisible) {
+			findViewById(R.id.imageview1).postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					switchUser(isNormalUser);
+				}
+			}, 100);
+			return;
+		}
+		TableLayout user = (TableLayout) findViewById(R.id.optionsUsers);
+		TableLayout engie = (TableLayout) findViewById(R.id.optionsEngies);
+		ImageView img = (ImageView) findViewById(R.id.imageView2);
 		user.setVisibility(isNormalUser ? View.VISIBLE : View.GONE);
+		img.setVisibility(isNormalUser ? View.VISIBLE : View.GONE);
 		engie.setVisibility(isNormalUser ? View.GONE : View.VISIBLE);
 		findViewById(R.id.relativeLayout1).invalidate();
 	}
@@ -62,14 +76,21 @@ public class MainActivity extends Activity {
 		plus.signOutFromGplus();
 		plus.signInWithGplus(instance);
 	}
-	
+
+	public void googleConnect() {
+		new GetCompanyInfo(MainActivity.instance).execute();
+	}
+
 	public void repairPhone(View view) {
 		startActivity(new Intent(this, ActivityRepairPhone.class));
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	public void openMap(View view) {
 		Intent intent = new Intent(this, ActivityMap.class);
-		startActivity(intent);
+		ActivityOptions options = ActivityOptions.makeScaleUpAnimation(view, 0,
+			      0, view.getWidth(), view.getHeight());
+		startActivity(intent, options.toBundle());
 	}
 
 	public void onPhoneInfoClicked(View view) {
@@ -185,16 +206,18 @@ public class MainActivity extends Activity {
 			}
 			for(Map<String, String> user : users) {
 				if(user.get("user_id_google").equals(MainActivity.plus.getUser().getId())) {
+					mainActivity.userInfo = user;
 					for(Map<String, String> bizz : businesses) {
-						if(user.get("user_id_google").equals(MainActivity.plus.getUser().getId())) {
-							if(user.get("zak_id").equals(bizz.get("zak_id"))) {
-								mainActivity.switchUser(false);
-								mainActivity.companyInfo = bizz;
-							}
+						if(user.get("zak_id").equals(bizz.get("zak_id"))) {
+							Log.i("user is doing bizzes");
+							mainActivity.companyInfo = bizz;
+							mainActivity.switchUser(false);
+							return;
 						}
 					}
 				}
 			}
+			mainActivity.switchUser(true);
 		}
 	}
 

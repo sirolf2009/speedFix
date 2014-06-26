@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.os.Build;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import com.fok.speedfix.R;
+
 public class Helper {
 
 	public static Map<String, String> decipherEngineer(String engineerData) {
@@ -217,6 +223,37 @@ public class Helper {
 
 		public GetAllBusinesses(IJsonResponse iJsonResponse) {
 			super("http://www.speedFix.eu/android/get_all_bizz.php", tag, cols);
+			this.response = iJsonResponse;
+		}
+
+		@Override
+		public void data(List<Map<String, String>> data) {
+			response.getResponse(data, tag);
+		}
+	}
+	
+	public static class GetAllDevices extends JSONDownloaderHandler {
+
+		public static final String[] cols = new String[] {
+			"device_id",
+			"device_board",
+			"device_brand",
+			"device_device",
+			"device_display",
+			"device_hardware",
+			"device_software",
+			"device_manufacturer",
+			"device_model",
+			"device_product",
+			"device_component",
+			"device_description",
+		};
+
+		private IJsonResponse response;
+		public static final String tag = "devices";
+
+		public GetAllDevices(IJsonResponse iJsonResponse) {
+			super("http://www.speedFix.eu/android/get_all_devices.php", tag, cols);
 			this.response = iJsonResponse;
 		}
 

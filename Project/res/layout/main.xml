@@ -2,8 +2,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/clrDarkGray"
+    android:background="@color/clrWhite"
     tools:context="${packageName}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/clrMarineBlue"
+        android:visibility="visible" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:onClick="repairPhone"
+            android:scaleType="fitXY"
+            android:src="@drawable/repair"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@string/app_name"
+            android:text="speedFix"
+            android:textColor="@color/clrWhite"
+            android:textColorLink="@color/clrWhite"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+    </RelativeLayout>
 
     <TableLayout
         android:id="@+id/optionsUser"
@@ -11,25 +46,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:stretchColumns="1" >
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/clrDarkRed" >
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="32dp"
-                android:onClick="repairPhone"
-                android:text="Reparatie Melden"
-                android:textStyle="bold" />
-        </RelativeLayout>
+        android:background="@color/clrWhite"
+        android:stretchColumns="1"
+        android:visibility="gone" >
 
         <TableRow
             android:id="@+id/tableRow2"
@@ -56,14 +75,6 @@
                     android:text="Mijn Gegevens"
                     android:textColor="@color/clrWhite"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/TextView06"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Een overzicht van uw gegevens"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/clrWhite" />
             </LinearLayout>
         </TableRow>
 
@@ -92,14 +103,6 @@
                     android:text="Mijn Locatie"
                     android:textColor="@color/clrWhite"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/TextView08"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Uw locatie, en de locatie van de bedrijven om u heen."
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/clrWhite" />
             </LinearLayout>
         </TableRow>
 
@@ -129,16 +132,7 @@
                     android:text="Registreer Uw Bedrijf"
                     android:textColor="@color/clrWhite"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/TextView03"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Vul uw activeringscode in en registreer uw bedrijf"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/clrWhite" />
             </LinearLayout>
-
         </TableRow>
     </TableLayout>
 
@@ -149,7 +143,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/optionsUser"
-        android:stretchColumns="1" >
+        android:background="@color/clrWhite"
+        android:stretchColumns="1" 
+        android:visibility="gone">
 
         <TableRow
             android:id="@+id/TableRow01"
@@ -177,14 +173,6 @@
                     android:text="Mijn Gegevens"
                     android:textColor="@color/clrWhite"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/TextView09"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Een overzicht van uw gegevens"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/clrWhite" />
             </LinearLayout>
         </TableRow>
 
@@ -206,25 +194,104 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/companyStreet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Phone List"
-                    android:textColor="@color/clrWhite"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/companyStreetDescriptor"
-                    android:layout_width="252dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Een lijst met alle telefoons die ter reparatie zijn opgesteld"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/clrWhite" />
             </LinearLayout>
+        </TableRow>
+    </TableLayout>
 
+    <TableLayout
+        android:id="@+id/optionsUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="128dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:stretchColumns="0,1,2"
+        android:visibility="visible" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:id="@+id/maps"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:background="@color/clrLightBlue"
+                android:onClick="openMap"
+                android:scaleType="centerInside"
+                android:src="@drawable/buttonmelding" />
+
+            <ImageView
+                android:id="@+id/phoneInfo"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:background="@color/clrOrange"
+                android:onClick="onPhoneInfoClicked"
+                android:scaleType="centerInside"
+                android:src="@drawable/buttonprofiel" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:background="@color/clrGreen"
+                android:onClick="onRegisterEngiePressed"
+                android:scaleType="centerInside"
+                android:src="@drawable/buttonzakelijk" />
+        </TableRow>
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/optionsUsers"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:onClick="repairPhone"
+        android:src="@drawable/buttonreparatie" />
+
+    <TableLayout
+        android:id="@+id/optionsEngies"
+        android:layout_width="wrap_content"
+        android:layout_height="128dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:stretchColumns="0,1,2"
+        android:visibility="visible" >
+
+        <TableRow
+            android:id="@+id/TableRow02"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:id="@+id/ImageView02"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:background="@color/clrLightBlue"
+                android:onClick="onPhoneListClicked"
+                android:scaleType="centerInside"
+                android:src="@drawable/buttonphones" />
+
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:background="@color/clrOrange"
+                android:onClick="onPhoneInfoClicked"
+                android:scaleType="centerInside"
+                android:src="@drawable/buttonprofiel" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:background="@color/clrGreen"
+                android:onClick="onRegisterEngiePressed"
+                android:scaleType="centerInside"
+                android:src="@drawable/buttonzakelijk" />
         </TableRow>
     </TableLayout>
 

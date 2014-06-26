@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/clrWhite" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -10,15 +11,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true" >
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/companyName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button1"
-        android:text="This view is for registering bussines only.  Did you register but didn&apos;t get your code? Contact us at www.speedFix.eu"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
         android:id="@+id/editText1"
@@ -35,16 +27,68 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/editText1"
         android:layout_centerHorizontal="true"
-        android:text="Enter Your Activation Code"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:paddingBottom="16dp"
+        android:text="Vul hier je activatie code in"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/clrBlack" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/clrGreen"
+        android:visibility="visible" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:onClick="repairPhone"
+            android:scaleType="fitXY"
+            android:src="@drawable/repair"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@string/app_name"
+            android:text="Zakelijk"
+            android:textColor="@color/clrWhite"
+            android:textColorLink="@color/clrWhite"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/companyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/companyDetailNameDescriptor"
+        android:layout_alignLeft="@+id/companyDetailNameDescriptor"
+        android:layout_alignRight="@+id/companyDetailNameDescriptor"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Deze scherm is bedoeld om je user account te koppelen aan je geregistreerdt bedrijf"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/clrBlack" />
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/companyDetailNameDescriptor"
+        android:layout_alignRight="@+id/editText1"
         android:layout_below="@+id/editText1"
+        android:layout_marginTop="30dp"
         android:onClick="validate"
-        android:text="@android:string/ok" />
+        android:text="Activeer" />
 
 </RelativeLayout>

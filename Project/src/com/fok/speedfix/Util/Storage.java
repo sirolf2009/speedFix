@@ -50,18 +50,18 @@ public class Storage {
 		return sharedPref.getStringSet(phonesKey, null);
 	}
 	
-	public static void savePhoneID(long ID, Context context) {
+	public static void savePhoneID(String ID, Context context) {
 		SharedPreferences sharedPref = context.getSharedPreferences(phoneIDFile, Context.MODE_PRIVATE);
 		Editor edit = sharedPref.edit();
 		edit.clear();
-		edit.putLong(phoneIDKey, ID);
+		edit.putString(phoneIDKey, ID);
 		if(!edit.commit()) {
 			Log.e("Could not save "+ID+" to "+phoneIDFile+" with key "+phoneIDKey);
 		}
 	}
 	
-	public static long readPhoneID(Context context) {
+	public static String readPhoneID(Context context) {
 		SharedPreferences sharedPref = context.getSharedPreferences(phoneIDFile, Context.MODE_PRIVATE);
-		return sharedPref.getLong(phoneIDKey, 0);
+		return sharedPref.getString(phoneIDKey, null);
 	}
 }

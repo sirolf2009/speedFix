@@ -142,6 +142,7 @@ public class GooglePlus implements ConnectionCallbacks, OnConnectionFailedListen
 		mSignInClicked = false;
 		activity.setTitle(activity.getTitle()+" - "+getUser().getDisplayName());
 		new CreateGoogleUser(getUser()).execute();
+		MainActivity.instance.googleConnect();
 	}
 	
 	public Person getUser() {

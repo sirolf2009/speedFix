@@ -2,18 +2,58 @@
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/clrWhite" >
+    
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/clrMarineBlue"
+            android:visibility="visible" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:onClick="repairPhone"
+                android:scaleType="fitXY"
+                android:src="@drawable/repair"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@string/app_name"
+                android:text="speedFix"
+                android:textColor="@color/clrWhite"
+                android:textColorLink="@color/clrWhite"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+        </RelativeLayout>
+
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+    android:background="@color/clrWhite" />
+
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+            android:layout_height="fill_parent"
+    android:background="@color/clrWhite" />
     </LinearLayout>
+
 </TabHost>

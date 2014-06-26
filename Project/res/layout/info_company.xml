@@ -13,7 +13,7 @@
             android:id="@+id/companyNameDescriptor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Company Name" />
+            android:text="Bedrijfsnaam" />
 
         <TextView
             android:id="@+id/companyName"
@@ -32,7 +32,7 @@
             android:id="@+id/companyStreetDescriptor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Street" />
+            android:text="Straat" />
 
         <TextView
             android:id="@+id/companyStreet"
@@ -69,7 +69,7 @@
             android:id="@+id/companyTelephoneDescriptor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Telephone" />
+            android:text="Telefoon" />
 
         <TextView
             android:id="@+id/companyTelephone"

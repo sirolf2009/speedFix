@@ -2,106 +2,128 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/clrWhite"
     android:orientation="horizontal"
     android:stretchColumns="0,1" >
 
-    <ImageView
-        android:id="@+id/imageAvatar"
+    <AbsoluteLayout
         android:layout_width="wrap_content"
-        android:layout_height="128dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp" >
+
+        <ImageView
+            android:id="@+id/ImageView02"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:src="@drawable/overlay" />
+
+        <ImageView
+            android:id="@+id/imageAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <ImageView
+            android:id="@+id/ImageView01"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:src="@drawable/overlay" />
+    </AbsoluteLayout>
 
     <TableRow
         android:id="@+id/tableRow1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/companyDetailNameDescriptor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name" />
 
         <TextView
             android:id="@+id/companyName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="32sp" />
     </TableRow>
 
-    <TableRow
-        android:id="@+id/tableRow2"
+    <TableLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:stretchColumns="0,1" >
 
-        <TextView
-            android:id="@+id/urlDescriptor"
+        <TableRow
+            android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="URL" />
+            android:visibility="gone" >
 
-        <TextView
-            android:id="@+id/url"
+            <TextView
+                android:id="@+id/urlDescriptor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Google URL" />
+
+            <TextView
+                android:id="@+id/url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/genderDescriptor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Geslacht" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-    </TableRow>
+            android:visibility="gone" >
 
-    <TableRow
-        android:id="@+id/TableRow3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/locationDescriptor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Locatie" />
 
-        <TextView
-            android:id="@+id/genderDescriptor"
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender" />
+            android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            <TextView
+                android:id="@+id/emailDescriptor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-Mail" />
 
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/locationDescriptor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location" />
-
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/emailDescriptor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="E-Mail" />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-    </TableRow>
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+    </TableLayout>
 
 </TableLayout>

@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/clrWhite" >
 
     <RelativeLayout
-        android:id="@+id/relativeLayout1"
+        android:id="@+id/RelativeLayout01"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:background="@color/clrGreen"
+        android:visibility="visible" >
 
         <ImageView
-            android:id="@+id/imageAvatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:onClick="repairPhone"
+            android:scaleType="fitXY"
+            android:src="@drawable/repair"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/logo" />
-
-        <TextView
-            android:id="@+id/companyDetailNameDescriptor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/imageAvatar"
-            android:text="speed"
-            android:textSize="32dp" />
-
-        <TextView
-            android:id="@+id/companyName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imageAvatar"
-            android:text="Fix"
-            android:textSize="32dp" />
+            android:fontFamily="@string/app_name"
+            android:text="Meld Reparatie"
+            android:textColor="@color/clrWhite"
+            android:textColorLink="@color/clrWhite"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
 
     </RelativeLayout>
 
@@ -45,16 +46,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView3"
-        android:entries="@array/components" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/relativeLayout1"
-        android:text="Broken component"
-        android:textSize="18sp" />
+        android:layout_marginLeft="16dp"
+        android:entries="@array/components"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -62,29 +57,57 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/spinner1"
-        android:text="Short description"
+        android:layout_marginLeft="16dp"
+        android:paddingTop="16dp"
+        android:text="Eventuele beschrijving"
         android:textSize="18sp" />
 
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView4"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:ems="10"
         android:inputType="textMultiLine" >
 
         <requestFocus />
     </EditText>
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/RelativeLayout01"
+        android:layout_marginLeft="16dp"
+        android:paddingTop="16dp"
+        android:text="Meld hier een reparatie van uw smartphone"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginLeft="16dp"
+        android:paddingTop="16dp"
+        android:text="De meest voorkomende reparaties"
+        android:textSize="18sp" />
+
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_marginBottom="32dp"
+        android:layout_marginRight="32dp"
         android:onClick="onOkPressed"
-        android:text="@android:string/ok" />
+        android:text="melden" />
 
 </RelativeLayout>

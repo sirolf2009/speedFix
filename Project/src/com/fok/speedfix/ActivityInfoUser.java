@@ -31,11 +31,6 @@ public class ActivityInfoUser extends Activity {
 			view.setText(MainActivity.plus.getUser().getDisplayName());
 		}
 		
-		view = (TextView) findViewById(R.id.url);
-		if(view != null) {
-			view.setText(MainActivity.plus.getUser().getUrl());
-		}
-		
 		view = (TextView) findViewById(R.id.gender);
 		if(view != null) {
 			view.setText(getStringFromGender(MainActivity.plus.getUser().getGender()));

@@ -6,14 +6,16 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:onClick="test"
-    android:paddingBottom="2dp" >
+    android:paddingBottom="2dp"
+    android:background="@color/clrWhite" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="64dp"
-        android:minWidth="64dp" >
+        android:minWidth="64dp"
+        android:textColorHint="@color/clrBlack" >
 
         <ImageView
             android:id="@+id/imageAvatar"
@@ -36,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/relativeLayout1"
-        android:text="Samsung" />
+        android:text="Samsung"
+        android:textColorHint="@color/clrBlack" />
 
     <TextView
         android:id="@+id/companyName"
@@ -44,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/companyDetailNameDescriptor"
         android:layout_toRightOf="@+id/relativeLayout1"
-        android:text="Broken Screen" />
+        android:text="Broken Screen"
+        android:textColorHint="@color/clrBlack" />
 
     <EditText
         android:id="@+id/editText1"
@@ -56,9 +60,8 @@
         android:ems="10"
         android:inputType="numberDecimal"
         android:nextFocusDown="@id/editText1"
-        android:nextFocusUp="@id/editText1" >
-
-        <requestFocus />
+        android:nextFocusUp="@id/editText1"
+        android:textColorHint="@color/clrBlack" >
     </EditText>
 
     <Button
@@ -69,7 +72,8 @@
         android:layout_alignBottom="@+id/editText1"
         android:layout_alignParentRight="true"
         android:onClick="onBidPressed"
-        android:text="BID" />
+        android:text="BID"
+        android:textColorHint="@color/clrBlack" />
 
     <TextView
         android:id="@+id/textView3"
@@ -77,7 +81,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/companyName"
         android:layout_below="@+id/companyName"
-        android:text="Lowest Bid: $50" />
+        android:text="Lowest Bid: $50"
+        android:textColorHint="@color/clrBlack" />
 
     <TableLayout
         android:id="@+id/moar_info"

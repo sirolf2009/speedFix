@@ -8,6 +8,8 @@ import com.fok.speedfix.util.IJsonResponse;
 import com.fok.speedfix.util.Log;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -48,10 +50,20 @@ public class ActivityRegisterEngie extends Activity implements IJsonResponse {
 				MainActivity.instance.userInfo = userInfo;
 				MainActivity.instance.companyInfo = bizz;
 				startActivity(new Intent(this, MainActivity.class));
+				finish();
 				return;
 			}
 		}
 		Log.i("no company found");
+		AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+		helpBuilder.setTitle("Error processing code");
+		helpBuilder.setMessage("Invalid activation code");
+		helpBuilder.setPositiveButton("Ok",	new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+			}
+		});
+		AlertDialog helpDialog = helpBuilder.create();
+		helpDialog.show();
 	}
 
 }

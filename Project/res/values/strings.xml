@@ -4,9 +4,14 @@
     <string name="app_name">speedFix</string>
     
     <color name="clrWhite">#FFFFFF</color>
+    <color name="clrBlack">#000000</color>
     <color name="clrDarkGray">#333542</color>
     <color name="clrDarkRed">#4F0101</color>
-    
+    <color name="clrLightBlue">#3598DB</color>
+    <color name="clrMarineBlue">#323A45</color>
+    <color name="clrOrange">#EB5401</color>
+    <color name="clrGreen">#01847E</color> 
+       
     <string name="icon">speedFix logo</string>
 
     <string name="user">Username</string>
