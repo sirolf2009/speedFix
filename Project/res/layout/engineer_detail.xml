@@ -40,31 +40,26 @@
             android:typeface="normal" />
     </RelativeLayout>
 
-    <TableLayout
+    <TextView
+        android:id="@+id/companyDetailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayout1"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
+        android:text="TextView"
+        android:textColor="#EB5401"
+        android:textSize="32sp" />
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="64dp"
         android:orientation="vertical"
         android:shrinkColumns="0"
         android:stretchColumns="1" >
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp" >
-
-            <TextView
-                android:id="@+id/companyDetailName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="#EB5401"
-                android:textSize="32sp" />
-
-        </TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
@@ -89,7 +84,6 @@
                 android:text="TextView"
                 android:textColor="@color/clrMarineBlue"
                 android:textSize="18sp" />
-
         </TableRow>
 
         <TableLayout
@@ -132,7 +126,6 @@
                     android:layout_height="wrap_content"
                     android:text="TextView"
                     android:textColor="@color/clrMarineBlue" />
-
             </TableRow>
 
             <TableRow
@@ -175,7 +168,6 @@
                     android:textColor="@color/clrMarineBlue" />
             </TableRow>
         </TableLayout>
-
     </TableLayout>
 
 </RelativeLayout>

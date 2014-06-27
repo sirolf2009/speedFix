@@ -32,10 +32,12 @@ public class ServiceDatabase extends Service {
 				if(android.os.Build.VERSION.SDK_INT >= 16) {
 					while(true) {
 						Looper.prepare();
-						if(!MainActivity.instance.isNormalUser) {
-							new PhoneListUpdate().execute();
-						} else {
-							new EngineerListUpdate().execute();
+						if(MainActivity.instance != null) {
+							if(!MainActivity.instance.isNormalUser) {
+								new PhoneListUpdate().execute();
+							} else {
+								new EngineerListUpdate().execute();
+							}
 						}
 						try {
 							Thread.sleep(1000); //10 mins

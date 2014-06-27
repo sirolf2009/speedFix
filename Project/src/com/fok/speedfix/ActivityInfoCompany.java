@@ -13,7 +13,7 @@ public class ActivityInfoCompany extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.info_company);
+		setContentView(R.layout.engineer_detail);
 		
 		GooglePlus.updateTitleBar(this);
 		

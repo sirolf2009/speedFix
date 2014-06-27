@@ -11,6 +11,6 @@
         android:layout_alignParentTop="true"
         android:contentDescription="splashScreen"
         android:scaleType="fitXY"
-        android:src="@drawable/splash" />
+        android:src="@drawable/splash_speedfix_small" />
 
 </RelativeLayout>
