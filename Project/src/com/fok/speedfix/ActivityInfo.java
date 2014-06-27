@@ -34,7 +34,7 @@ public class ActivityInfo extends TabActivity {
 		if(!MainActivity.instance.isNormalUser) {
 			TabSpec company = tabHost.newTabSpec("Bedrijf");        
 			company.setIndicator("Bedrijf");
-			Intent intent = new Intent(this, ActivityCompanyDetail.class);
+			Intent intent = new Intent(this, ActivityInfoCompany.class);
 			Map<String, String> companyDetails = MainActivity.instance.companyInfo;
 			intent.putExtra("company", Helper.encipherEngineer(companyDetails));
 			company.setContent(intent);

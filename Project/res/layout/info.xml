@@ -35,7 +35,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:fontFamily="@string/app_name"
-                android:text="speedFix"
+                android:text="info"
                 android:textColor="@color/clrWhite"
                 android:textColorLink="@color/clrWhite"
                 android:textSize="32sp"

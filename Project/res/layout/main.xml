@@ -260,7 +260,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:stretchColumns="0,1,2"
-        android:visibility="invisible" >
+        android:visibility="visible" >
 
         <TableRow
             android:id="@+id/TableRow02"
@@ -294,5 +294,15 @@
                 android:src="@drawable/buttonzakelijk" />
         </TableRow>
     </TableLayout>
+
+    <ImageView
+        android:id="@+id/backgroundEngineer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/optionsEngies"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:src="@drawable/background_engineer"
+        android:visibility="visible" />
 
 </RelativeLayout>

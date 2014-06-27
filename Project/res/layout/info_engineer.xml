@@ -4,47 +4,10 @@
     android:layout_height="match_parent"
     android:background="@color/clrWhite" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/clrMarineBlue"
-        android:visibility="visible" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:onClick="repairPhone"
-            android:scaleType="fitXY"
-            android:src="@drawable/repair"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/posIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@string/app_name"
-            android:text="info"
-            android:textColor="@color/clrWhite"
-            android:textColorLink="@color/clrWhite"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:typeface="normal" />
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/companyDetailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:text="TextView"
@@ -73,22 +36,28 @@
                 android:id="@+id/companyDetailStreet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
                 android:text="TextView"
                 android:textColor="@color/clrMarineBlue"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/companyDetailPostal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="@color/clrMarineBlue"
-                android:textSize="18sp" />
         </TableRow>
+
+        <TextView
+            android:id="@+id/companyDetailPostal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="@color/clrMarineBlue"
+            android:textSize="18sp" />
 
         <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp" >
 
             <TableRow
                 android:id="@+id/TableRow3"
@@ -103,17 +72,19 @@
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:scaleType="centerInside"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitStart"
                     android:src="@drawable/iconphone" />
 
                 <TextView
                     android:id="@+id/companyDetailTelephone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:text="TextView"
                     android:textColor="@color/clrMarineBlue" />
+
             </TableRow>
 
             <TableRow
@@ -137,14 +108,17 @@
                     android:id="@+id/companyDetailMobile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:text="TextView"
                     android:textColor="@color/clrMarineBlue" />
+
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
 
                 <TextView
                     android:id="@+id/TextView02"
@@ -154,23 +128,26 @@
 
                 <ImageView
                     android:id="@+id/ImageView01"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:scaleType="centerInside"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitStart"
                     android:src="@drawable/iconmail" />
 
                 <TextView
                     android:id="@+id/companyDetailEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:text="TextView"
                     android:textColor="@color/clrMarineBlue" />
+
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
 
                 <TextView
                     android:id="@+id/TextView03"
@@ -180,19 +157,28 @@
 
                 <ImageView
                     android:id="@+id/ImageView02"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:scaleType="centerInside"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitStart"
                     android:src="@drawable/iconkvk" />
 
                 <TextView
                     android:id="@+id/companyDetailKVK"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:text="TextView"
                     android:textColor="@color/clrMarineBlue" />
+
             </TableRow>
         </TableLayout>
     </TableLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tableLayout1" />
 
 </RelativeLayout>

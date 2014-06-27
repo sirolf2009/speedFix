@@ -66,9 +66,11 @@ public class MainActivity extends Activity {
 		TableLayout user = (TableLayout) findViewById(R.id.optionsUsers);
 		TableLayout engie = (TableLayout) findViewById(R.id.optionsEngies);
 		ImageView img = (ImageView) findViewById(R.id.imageView2);
+		ImageView imgEngie = (ImageView) findViewById(R.id.backgroundEngineer);
 		user.setVisibility(isNormalUser ? View.VISIBLE : View.GONE);
 		img.setVisibility(isNormalUser ? View.VISIBLE : View.GONE);
 		engie.setVisibility(isNormalUser ? View.GONE : View.VISIBLE);
+		imgEngie.setVisibility(isNormalUser ? View.GONE : View.VISIBLE);
 		findViewById(R.id.relativeLayout1).invalidate();
 	}
 

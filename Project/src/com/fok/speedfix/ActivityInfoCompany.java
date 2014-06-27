@@ -13,30 +13,42 @@ public class ActivityInfoCompany extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.engineer_detail);
+		setContentView(R.layout.info_engineer);
 		
 		GooglePlus.updateTitleBar(this);
 		
-		Map<String, String> company = MainActivity.instance.companyInfo;
+		Map<String, String> engineer = MainActivity.instance.companyInfo;
 		
-		TextView view = (TextView) findViewById(R.id.companyName);
-		if(view != null) {
-			view.setText(company.get("zak_bedrijfsnaam"));
+		TextView itemView = (TextView) findViewById(R.id.companyDetailName);
+		if (itemView != null) {
+			itemView.setText(engineer.get("zak_bedrijfsnaam"));
+		}
+
+		itemView = (TextView) findViewById(R.id.companyDetailStreet);
+		if (itemView != null) {
+			itemView.setText(engineer.get("zak_straat")+" "+engineer.get("zak_huisnummer")+engineer.get("zak_toevoeging"));
 		}
 		
-		view = (TextView) findViewById(R.id.companyStreet);
-		if(view != null) {
-			view.setText(company.get("zak_straat")+" "+company.get("zak_huisnummer")+" "+company.get("zak_toevoeging"));
+		itemView = (TextView) findViewById(R.id.companyDetailPostal);
+		if (itemView != null) {
+			itemView.setText(engineer.get("zak_postcode")+" "+engineer.get("zak_plaats"));
 		}
-		
-		view = (TextView) findViewById(R.id.companyEmail);
-		if(view != null) {
-			view.setText(company.get("zak_email"));
+
+		itemView = (TextView) findViewById(R.id.companyDetailTelephone);
+		if (itemView != null) {
+			itemView.setText(engineer.get("zak_telefoon"));
 		}
-		
-		view = (TextView) findViewById(R.id.companyTelephone);
-		if(view != null) {
-			view.setText(company.get("zak_telefoon"));
+		itemView = (TextView) findViewById(R.id.companyDetailMobile);
+		if (itemView != null) {
+			itemView.setText(engineer.get("zak_mobiel"));
+		}
+		itemView = (TextView) findViewById(R.id.companyDetailEmail);
+		if (itemView != null) {
+			itemView.setText(engineer.get("zak_email"));
+		}
+		itemView = (TextView) findViewById(R.id.companyDetailKVK);
+		if (itemView != null) {
+			itemView.setText(engineer.get("zak_kvk"));
 		}
 	}
 }
