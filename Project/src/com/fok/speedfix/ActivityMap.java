@@ -239,11 +239,24 @@ public class ActivityMap extends ActivityBaseMap {
 		}
 	}
 
-	public static void notifyIfNewEngineer(Context context, Iterable<String> engineers) {
+	public synchronized static void notifyIfNewEngineer(Context context, List<String> engineers) {
 		Set<String> saved = Storage.readEngineers(context);
 		if(saved == null) {
 			saved = new HashSet<String>();
 		}
+		Log.i("faulty check");
+		List<String> faulty = new ArrayList<String>();
+		for(String string : saved) {
+			if(!engineers.contains(string)) {
+				faulty.add(string);
+			}
+		}
+		Log.i("faulty size "+faulty.size());
+		for(String string : faulty) {
+			Log.i("removing faulty "+string);
+			saved.remove(string);
+		}
+		faulty.clear();
 		for(String string : engineers) {
 			if(!saved.contains(string)) {
 				createNotification(Helper.decipherEngineer(string).get("zak_bedrijfsnaam"), context);
