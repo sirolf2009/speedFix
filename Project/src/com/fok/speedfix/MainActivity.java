@@ -6,6 +6,8 @@ import java.util.Map;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import com.fok.speedfix.util.Helper;
 import com.fok.speedfix.util.IJsonResponse;
 import com.fok.speedfix.util.JSONDownloaderHandler;
 import com.fok.speedfix.util.Log;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class MainActivity extends Activity {
 
@@ -30,6 +34,7 @@ public class MainActivity extends Activity {
 	public Map<String, String> userInfo;
 
 	public boolean isMenuVisible;
+	public boolean isConnected;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +42,46 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 
-		findViewById(R.id.imageview1).postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				instance.setContentView(R.layout.main);
-				isMenuVisible = true;
-			}
-		}, 2000);
+		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+		if(status != ConnectionResult.SUCCESS) {
+			AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+			helpBuilder.setTitle("Couldn't find Google Play Services");
+			helpBuilder.setMessage("Please install Google Play Services");
+			helpBuilder.setPositiveButton("Ok",	new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			});
+			AlertDialog helpDialog = helpBuilder.create();
+			helpDialog.show();
+		} else {
 
-		plus = new GooglePlus();
-		plus.signInWithGplus(instance);
+			findViewById(R.id.imageview1).postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					if(!isConnected) {
+						AlertDialog.Builder helpBuilder = new AlertDialog.Builder(instance);
+						helpBuilder.setTitle("Timout");
+						helpBuilder.setMessage("Timeout during Google+ Sign In");
+						helpBuilder.setPositiveButton("Ok",	new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								finish();
+							}
+						});
+						AlertDialog helpDialog = helpBuilder.create();
+						helpDialog.show();
+					} else {
+						instance.setContentView(R.layout.main);
+						isMenuVisible = true;
+					}
+				}
+			}, 5000);
 
-		startService(new Intent(this, ServiceDatabase.class));
+			plus = new GooglePlus();
+			plus.signInWithGplus(instance);
+
+			startService(new Intent(this, ServiceDatabase.class));
+		}
 	}
 
 	public void switchUser(final boolean isNormalUser) {
@@ -80,6 +113,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void googleConnect() {
+		isConnected = true;
 		new GetCompanyInfo(MainActivity.instance).execute();
 	}
 
@@ -91,7 +125,7 @@ public class MainActivity extends Activity {
 	public void openMap(View view) {
 		Intent intent = new Intent(this, ActivityMap.class);
 		ActivityOptions options = ActivityOptions.makeScaleUpAnimation(view, 0,
-			      0, view.getWidth(), view.getHeight());
+				0, view.getWidth(), view.getHeight());
 		startActivity(intent, options.toBundle());
 	}
 
